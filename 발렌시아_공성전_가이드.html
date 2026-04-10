@@ -610,82 +610,102 @@
                 <!-- CSS Interactive Map & Buttons -->
                 <div class="relative bg-stone-50 rounded-xl p-6 border border-stone-200 flex flex-col items-center justify-center min-h-[450px] gap-6">
                     
-                    <!-- CSS Recreated Map based on image_347d82.png -->
-                    <div class="relative w-full max-w-[400px] aspect-[4/3] bg-[#2a3241] rounded-xl shadow-lg border-2 border-stone-700 overflow-hidden text-white font-sans mx-auto">
-                        <!-- Abstract Background Lines -->
-                        <div class="absolute top-[15%] bottom-[15%] left-[15%] right-[15%] border-2 border-stone-600/50 rounded bg-[#222834]"></div>
-                        <!-- Blue arrow down -->
-                        <div class="absolute top-[12%] left-1/2 w-1 h-[12%] bg-blue-300 -translate-x-1/2"></div>
-                        <div class="absolute top-[24%] left-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-300 -translate-x-1/2"></div>
-                        
-                        <!-- Paths to attackers -->
-                        <div class="absolute top-[75%] left-[25%] w-[35%] h-1 bg-[#84cc16]/40 origin-left -rotate-[35deg]"></div>
-                        <div class="absolute top-[75%] right-[25%] w-[35%] h-1 bg-[#ef4444]/40 origin-right rotate-[35deg]"></div>
+                    <!-- CSS Recreated Map based on original image proportions -->
+                    <div class="relative w-full max-w-[400px] aspect-[4/3] bg-[#1e232d] rounded-xl shadow-lg border-2 border-stone-700 overflow-hidden text-white font-sans mx-auto">
+                        <!-- Abstract Background Lines (Shield Shape Concept) -->
+                        <!-- Center path -->
+                        <div class="absolute top-[10%] bottom-[30%] left-1/2 w-0.5 bg-stone-600/50 -translate-x-1/2"></div>
+                        <!-- Inner horizontal -->
+                        <div class="absolute top-[45%] left-[25%] right-[25%] h-0.5 bg-stone-600/50"></div>
+                        <!-- Bottom diagonal paths -->
+                        <div class="absolute top-[65%] left-[30%] w-[25%] h-0.5 bg-stone-600/50 origin-bottom-right rotate-[30deg]"></div>
+                        <div class="absolute top-[65%] right-[30%] w-[25%] h-0.5 bg-stone-600/50 origin-bottom-left -rotate-[30deg]"></div>
+
+                        <!-- Blue arrow down from def spawn -->
+                        <div class="absolute top-[20%] left-1/2 w-1 h-[8%] bg-blue-400 -translate-x-1/2"></div>
+                        <div class="absolute top-[28%] left-1/2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-400 -translate-x-1/2"></div>
 
                         <!-- 1. 수성측 거점 -->
-                        <div class="css-map-point flex flex-col items-center absolute top-[4%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="def-spawn">
-                            <div class="map-circle w-7 h-7 bg-white text-black rounded-full flex items-center justify-center font-bold border-4 border-black">1</div>
-                            <span class="text-[10px] mt-1 font-semibold text-stone-300 whitespace-nowrap">수성측 거점</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[10%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="def-spawn">
+                            <div class="map-circle w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold text-lg border-4 border-stone-600 relative">1
+                                <span class="absolute top-full mt-1 text-[11px] font-semibold text-stone-200 whitespace-nowrap">수성측 거점</span>
+                            </div>
                         </div>
 
                         <!-- 2, 3. 내성문 -->
-                        <div class="css-map-point flex items-center gap-1 absolute top-[26%] left-[38%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-circle w-6 h-6 bg-white text-black rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-black">2</div>
+                        <div class="css-map-point flex items-center justify-center absolute top-[28%] left-[40%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
+                            <div class="map-circle w-6 h-6 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-500 relative">2
+                                <span class="absolute right-full mr-2 text-[10px] font-medium text-stone-300 whitespace-nowrap">내성문</span>
+                            </div>
                         </div>
-                        <div class="css-map-point flex items-center gap-1 absolute top-[26%] left-[62%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-circle w-6 h-6 bg-white text-black rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-black">3</div>
-                            <span class="text-[10px] font-semibold text-stone-300 ml-1 whitespace-nowrap">내성문</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[28%] left-[60%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
+                            <div class="map-circle w-6 h-6 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-500 relative">3
+                                <span class="absolute left-full ml-2 text-[10px] font-medium text-stone-300 whitespace-nowrap">내성문</span>
+                            </div>
                         </div>
 
                         <!-- 4. 수성측 성물 -->
-                        <div class="css-map-point flex flex-col items-center absolute top-[42%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="artifact">
-                            <div class="text-blue-300 text-lg mb-0.5 leading-none">⚙️</div>
-                            <div class="map-circle w-7 h-7 bg-white text-black rounded-full flex items-center justify-center font-bold border-4 border-black">4</div>
-                            <span class="text-[10px] mt-1 text-stone-200 font-semibold whitespace-nowrap">수성측 성물</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[45%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="artifact">
+                            <div class="map-circle w-8 h-8 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-stone-400 relative">4
+                                <div class="absolute -top-4 text-blue-200 text-xl leading-none drop-shadow-md">⚙️</div>
+                                <span class="absolute top-full mt-1 text-[11px] font-semibold text-stone-200 whitespace-nowrap">수성측 성물</span>
+                            </div>
                         </div>
 
                         <!-- 2. 제1 외성문 (Left) -->
-                        <div class="css-map-point flex flex-col items-center absolute top-[43%] left-[18%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-circle w-6 h-6 bg-white text-[#84cc16] rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-[#84cc16]">2</div>
-                            <span class="text-[10px] mt-1 font-semibold text-stone-300 whitespace-nowrap">제1 외성문</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[45%] left-[22%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-[#a3e635] rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-[#65a30d] relative">2
+                                <span class="absolute top-full mt-1 text-[10px] font-medium text-stone-300 whitespace-nowrap">제1 외성문</span>
+                            </div>
                         </div>
 
                         <!-- 2. 제2 외성문 (Right) -->
-                        <div class="css-map-point flex flex-col items-center absolute top-[43%] left-[82%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-circle w-6 h-6 bg-white text-[#ef4444] rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-[#ef4444]">2</div>
-                            <span class="text-[10px] mt-1 font-semibold text-stone-300 whitespace-nowrap">제2 외성문</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[45%] left-[78%] -translate-x-1/2 cursor-pointer z-10" data-target="gates">
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-[#fca5a5] rounded-full flex items-center justify-center font-bold text-sm border-[3px] border-[#dc2626] relative">2
+                                <span class="absolute top-full mt-1 text-[10px] font-medium text-stone-300 whitespace-nowrap">제2 외성문</span>
+                            </div>
                         </div>
 
                         <!-- 3. 제3 외성문 (Bottom Center) -->
-                        <div class="css-map-point flex items-center gap-1 absolute top-[68%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-circle w-5 h-5 bg-[#84cc16] text-black rounded-full flex items-center justify-center font-bold text-xs">3</div>
-                            <div class="map-circle w-5 h-5 bg-[#ef4444] text-white rounded-full flex items-center justify-center font-bold text-xs">3</div>
+                        <div class="css-map-point flex items-center justify-center absolute top-[65%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="gates">
+                            <div class="flex gap-0.5 relative">
+                                <div class="map-circle w-6 h-6 bg-[#65a30d] text-white rounded-full flex items-center justify-center font-bold text-xs shadow-sm">3</div>
+                                <div class="map-circle w-6 h-6 bg-[#dc2626] text-white rounded-full flex items-center justify-center font-bold text-xs shadow-sm">3</div>
+                                <span class="absolute left-full ml-2 top-1/2 -translate-y-1/2 text-[10px] font-medium text-stone-300 whitespace-nowrap">제3 외성문</span>
+                            </div>
                         </div>
 
                         <!-- 1. 제1 공성측 거점 -->
-                        <div class="css-map-point flex flex-col items-center absolute bottom-[8%] left-[22%] -translate-x-1/2 cursor-pointer z-10" data-target="atk-spawn">
-                            <div class="map-circle w-7 h-7 bg-white text-black rounded-full flex items-center justify-center font-bold border-4 border-[#84cc16]">1</div>
-                            <span class="text-[10px] font-semibold text-[#bef264] mt-1 whitespace-nowrap">제1 공성측</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[80%] left-[30%] -translate-x-1/2 cursor-pointer z-10" data-target="atk-spawn">
+                            <div class="map-circle w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold text-lg border-4 border-[#65a30d] relative">1
+                                <span class="absolute right-full mr-2 text-[11px] font-semibold text-[#bef264] whitespace-nowrap">제1 공성측</span>
+                            </div>
                         </div>
 
                         <!-- 1. 제2 공성측 거점 -->
-                        <div class="css-map-point flex flex-col items-center absolute bottom-[8%] left-[78%] -translate-x-1/2 cursor-pointer z-10" data-target="atk-spawn">
-                            <div class="map-circle w-7 h-7 bg-white text-black rounded-full flex items-center justify-center font-bold border-4 border-[#ef4444]">1</div>
-                            <span class="text-[10px] font-semibold text-[#fca5a5] mt-1 whitespace-nowrap">제2 공성측</span>
+                        <div class="css-map-point flex items-center justify-center absolute top-[80%] left-[70%] -translate-x-1/2 cursor-pointer z-10" data-target="atk-spawn">
+                            <div class="map-circle w-8 h-8 bg-white text-black rounded-full flex items-center justify-center font-bold text-lg border-4 border-[#dc2626] relative">1
+                                <span class="absolute left-full ml-2 text-[11px] font-semibold text-[#fca5a5] whitespace-nowrap">제2 공성측</span>
+                            </div>
                         </div>
 
-                        <!-- 외곽 거점 -->
-                        <div class="css-map-point flex flex-col items-center absolute top-[53%] left-3 cursor-pointer z-10" data-target="outpost-west">
-                            <div class="map-circle w-5 h-5 bg-stone-700 text-white rounded-sm flex items-center justify-center font-bold text-xs border border-stone-400">서</div>
-                            <span class="text-[9px] font-semibold text-stone-300 mt-1 whitespace-nowrap">서쪽 외곽</span>
+                        <!-- 외곽 거점 (Extra Features) -->
+                        <div class="css-map-point flex items-center justify-center absolute top-[65%] left-4 cursor-pointer z-10" data-target="outpost-west">
+                            <div class="map-circle w-auto px-1.5 h-6 bg-stone-800 text-white rounded-sm flex items-center justify-center font-bold text-[10px] border border-stone-500 relative shadow-md">서쪽 외곽
+                                <span class="absolute top-full mt-1 text-[9px] font-medium text-stone-300 whitespace-nowrap">대포 지원</span>
+                            </div>
                         </div>
-                        <div class="css-map-point flex flex-col items-center absolute top-[53%] right-3 cursor-pointer z-10" data-target="outpost-east">
-                            <div class="map-circle w-5 h-5 bg-stone-700 text-white rounded-sm flex items-center justify-center font-bold text-xs border border-stone-400">동</div>
-                            <span class="text-[9px] font-semibold text-stone-300 mt-1 whitespace-nowrap">동쪽 외곽</span>
+                        
+                        <div class="css-map-point flex items-center justify-center absolute top-[65%] right-4 cursor-pointer z-10" data-target="outpost-east">
+                            <div class="map-circle w-auto px-1.5 h-6 bg-stone-800 text-white rounded-sm flex items-center justify-center font-bold text-[10px] border border-stone-500 relative shadow-md">동쪽 외곽
+                                <span class="absolute top-full mt-1 text-[9px] font-medium text-stone-300 whitespace-nowrap">신기전 지원</span>
+                            </div>
                         </div>
-                        <div class="css-map-point flex flex-col items-center absolute bottom-[4%] left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="outpost-south">
-                            <span class="text-[10px] font-semibold text-amber-200 mb-0.5 whitespace-nowrap">전장의 오우거</span>
-                            <div class="map-circle w-5 h-5 bg-amber-600 text-white rounded-sm flex items-center justify-center font-bold text-xs border border-amber-300">남</div>
+                        
+                        <div class="css-map-point flex items-center justify-center absolute bottom-3 left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="outpost-south">
+                            <div class="map-circle w-auto px-2 h-6 bg-amber-700 text-amber-50 rounded-sm flex items-center justify-center font-bold text-[11px] border border-amber-500 relative shadow-md">남쪽 외곽
+                                <span class="absolute bottom-full mb-1 text-[10px] font-bold text-amber-300 whitespace-nowrap">전장의 오우거</span>
+                            </div>
                         </div>
                     </div>
                     
