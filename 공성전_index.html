@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검은사막 모바일 리젠 길드 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #121212; /* Very dark background */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(217, 119, 6, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(217, 119, 6, 0.08), transparent 25%);
+            color: #e7e5e4;
+        }
+
+        .guide-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(217, 119, 6, 0.15), 0 8px 10px -6px rgba(217, 119, 6, 0.1);
+            border-color: #d97706; /* amber-600 */
+        }
+
+        .guide-card:hover .card-icon {
+            color: #d97706;
+            transform: scale(1.1);
+        }
+
+        .card-icon {
+            transition: all 0.3s ease;
+        }
+        
+        /* Text Glow Effect */
+        .text-glow {
+            text-shadow: 0 0 15px rgba(217, 119, 6, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-amber-600 selection:text-white">
+
+    <!-- Hero / Header Section -->
+    <header class="relative pt-24 pb-16 px-4 text-center overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none flex justify-center items-center">
+            <div class="w-[800px] h-[400px] bg-amber-600/20 blur-[120px] rounded-full"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+            <!-- Guild Emblem/Icon Placeholder -->
+            <div class="w-24 h-24 mb-6 rounded-full bg-stone-800 border-2 border-amber-600 shadow-[0_0_20px_rgba(217,119,6,0.4)] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-12 h-12 text-amber-500">
+                    <path fill-rule="evenodd" d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08zm3.094 8.016a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            
+            <h2 class="text-amber-500 font-bold tracking-widest text-sm sm:text-base uppercase mb-2">Black Desert Mobile</h2>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight mb-6">
+                검은사막 모바일 <br class="sm:hidden" />리젠 길드 가이드
+            </h1>
+            
+            <!-- Catchphrase -->
+            <div class="inline-block relative">
+                <span class="absolute inset-0 bg-amber-500 blur-md opacity-30"></span>
+                <p class="relative text-2xl md:text-3xl font-black text-amber-400 tracking-wider text-glow py-2 px-6 border-y border-amber-500/30">
+                    "리젠은 강하다"
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content (Cards Grid) -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-24 z-10 relative">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mt-8">
+            
+            <!-- Card 1: Calpheon -->
+            <a href="칼페온_공성전_가이드.html" class="guide-card block bg-[#1a1d24] border border-stone-700 rounded-2xl p-8 lg:p-10 relative overflow-hidden group">
+                <!-- Background decoration -->
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-stone-800 rounded-full opacity-20 group-hover:bg-amber-900/30 transition-colors duration-500"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-stone-800 border border-stone-600 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-stone-300 card-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                            </svg>
+                        </div>
+                        <span class="px-3 py-1 bg-stone-800 text-stone-300 text-xs font-bold rounded-full border border-stone-600 group-hover:bg-amber-900/50 group-hover:text-amber-400 group-hover:border-amber-700/50 transition-colors">공성/수성 전술</span>
+                    </div>
+                    
+                    <h3 class="text-3xl font-bold text-white mb-3">칼페온 공성전</h3>
+                    <p class="text-stone-400 mb-8 leading-relaxed flex-grow">
+                        양갈래 진입로(V자 지형)와 흑정령 탈출을 활용한 기동성 중심의 전투. 부활 장소 전진 배치와 기습 백업 등 속도전을 지배하는 전술을 확인하세요.
+                    </p>
+                    
+                    <div class="flex items-center text-amber-500 font-bold text-sm">
+                        <span>작전실 입장하기</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2: Valencia -->
+            <a href="발렌시아_공성전_가이드.html" class="guide-card block bg-[#1a1d24] border border-stone-700 rounded-2xl p-8 lg:p-10 relative overflow-hidden group">
+                <!-- Background decoration -->
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-stone-800 rounded-full opacity-20 group-hover:bg-amber-900/30 transition-colors duration-500"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-stone-800 border border-stone-600 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-stone-300 card-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                            </svg>
+                        </div>
+                        <span class="px-3 py-1 bg-stone-800 text-stone-300 text-xs font-bold rounded-full border border-stone-600 group-hover:bg-amber-900/50 group-hover:text-amber-400 group-hover:border-amber-700/50 transition-colors">공성/수성 전술</span>
+                    </div>
+                    
+                    <h3 class="text-3xl font-bold text-white mb-3">발렌시아 공성전</h3>
+                    <p class="text-stone-400 mb-8 leading-relaxed flex-grow">
+                        일자형 병목 구간을 활용한 철통 수비와 소환형 병기(아알의 심판)를 이용한 화력 돌파전. 외곽 타워와 전장의 오우거를 둔 치열한 힘싸움 가이드입니다.
+                    </p>
+                    
+                    <div class="flex items-center text-amber-500 font-bold text-sm">
+                        <span>작전실 입장하기</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-stone-800 py-8 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-stone-500 text-sm font-medium">© REGEN GUILD. All tactics reserved for victory.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
