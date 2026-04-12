@@ -208,11 +208,21 @@
         import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // 1. Setup Firebase Configuration
-        let firebaseConfig = {};
-        if (typeof __firebase_config !== 'undefined') {
-            firebaseConfig = JSON.parse(__firebase_config);
-        }
+        // =========================================================================
+        // 💡 중요: Github Pages(로컬)에서 로그인과 DB 수정을 활성화하려면
+        // Firebase Console(console.firebase.google.com)에서 프로젝트를 만들고 
+        // 아래 localFirebaseConfig 의 내용을 본인의 정보로 채워주셔야 합니다.
+        // =========================================================================
+        const localFirebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        let firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'regen-guide-index';
 
         const app = initializeApp(firebaseConfig);
@@ -249,12 +259,15 @@
             }, 3000);
         }
 
-        // 2. Initial Auth Setup (Canvas Required)
+        // Check if running on file:// protocol
+        const isLocalFile = window.location.protocol === 'file:';
+
+        // 2. Initial Auth Setup
         const initAuth = async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                     await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
+                } else if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
                     await signInAnonymously(auth);
                 }
             } catch (error) {
@@ -263,7 +276,7 @@
         };
         initAuth();
 
-        // 3. Auth State Listener (데이터 접근은 항상 인증 이후에 진행)
+        // 3. Auth State Listener
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 isUserAdmin = false;
@@ -276,7 +289,7 @@
                     unsubscribeSnapshot();
                     unsubscribeSnapshot = null;
                 }
-                return; // 권한이 없으면 DB 조회 중지
+                return;
             }
 
             // 구글 계정으로 로그인 된 경우 관리자로 처리
@@ -286,7 +299,7 @@
                 editControls.classList.remove('hidden');
                 editControls.classList.add('flex');
             } else {
-                // 익명 로그인 상태 (일반 사용자)
+                // 익명 로그인 상태
                 isUserAdmin = false;
                 authBtnText.textContent = "관리자 로그인";
                 editControls.classList.add('hidden');
@@ -294,8 +307,8 @@
                 if (isEditMode) toggleEditMode(); 
             }
 
-            // 4. Data Sync (Firestore -> DOM) - 권한 에러 방지를 위해 인증 완료 후 실행
-            if (!unsubscribeSnapshot) {
+            // 4. Data Sync
+            if (!unsubscribeSnapshot && firebaseConfig.apiKey !== "YOUR_API_KEY") {
                 unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
                     if (docSnap.exists()) {
                         const data = docSnap.data();
@@ -314,10 +327,22 @@
 
         // 5. Handlers
         authBtn.addEventListener('click', async () => {
+            // 방어 코드: 파이어베이스 설정이 안 된 경우
+            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
+                showToast("파이어베이스 설정(firebaseConfig)이 비어있습니다. 소스코드를 열어 설정값을 입력해주세요.", true);
+                return;
+            }
+
+            // 방어 코드: 로컬 파일 경로인 경우
+            if (isLocalFile) {
+                showToast("구글 로그인은 보안상 웹 서버(GitHub Pages 등)에서만 작동합니다. 파일을 호스팅한 뒤 실행해주세요.", true);
+                return;
+            }
+
             if (isUserAdmin) {
                 try {
                     await signOut(auth);
-                    await initAuth(); // 로그아웃 후 다시 익명 로그인으로 돌아가기
+                    await initAuth(); 
                     showToast("로그아웃 되었습니다.");
                 } catch (error) {
                     showToast("로그아웃 실패", true);
@@ -342,11 +367,10 @@
                 toggleEditBtn.classList.replace('hover:bg-stone-600', 'hover:bg-rose-600');
                 saveBtn.classList.remove('hidden');
                 
-                // Prevent links from navigating while editing
                 document.querySelectorAll('a.guide-card').forEach(a => {
                     a.dataset.href = a.href;
                     a.removeAttribute('href');
-                    a.classList.remove('hover:-translate-y-2'); // reduce hover effect slightly
+                    a.classList.remove('hover:-translate-y-2');
                 });
 
                 editableElements.forEach(el => {
@@ -359,7 +383,6 @@
                 toggleEditBtn.classList.replace('hover:bg-rose-600', 'hover:bg-stone-600');
                 saveBtn.classList.add('hidden');
                 
-                // Restore links
                 document.querySelectorAll('a.guide-card').forEach(a => {
                     a.href = a.dataset.href;
                 });
@@ -378,7 +401,6 @@
             const newData = {};
             editableElements.forEach(el => {
                 const key = el.getAttribute('data-edit-key');
-                // innerText preserves some formatting, but for single lines textContent is safer
                 newData[key] = el.textContent.trim(); 
             });
 
@@ -388,7 +410,7 @@
             try {
                 await setDoc(getDocRef(), newData, { merge: true });
                 showToast("변경사항이 성공적으로 저장되었습니다.");
-                toggleEditMode(); // Turn off edit mode after save
+                toggleEditMode();
             } catch (error) {
                 showToast("저장에 실패했습니다. 권한을 확인하세요.", true);
                 console.error("Save error:", error);
