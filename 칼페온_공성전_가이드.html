@@ -78,6 +78,29 @@
             font-weight: 700;
         }
 
+        /* Editable Field Styles */
+        [contenteditable="true"] {
+            outline: 2px dashed #d97706;
+            background-color: rgba(217, 119, 6, 0.15);
+            border-radius: 4px;
+            padding: 2px 4px;
+            cursor: text;
+            transition: background-color 0.2s;
+        }
+        [contenteditable="true"]:focus {
+            background-color: rgba(217, 119, 6, 0.3);
+            outline: 2px solid #f59e0b;
+        }
+
+        /* Toast Animation */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast-enter {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+
         /* AI Loader */
         .loader {
             border: 3px solid #f3f4f6;
@@ -121,9 +144,9 @@
         <!-- Hero Section -->
         <section class="text-center py-12 md:py-20">
             <h1 class="text-4xl md:text-5xl font-black text-stone-900 mb-6 leading-tight">
-                <span class="text-amber-600">칼페온 공성전 핵심 가이드</span>
+                <span class="text-amber-600" data-edit-key="mainTitle">칼페온 공성전 핵심 가이드</span>
             </h1>
-            <p class="mt-4 max-w-2xl text-lg text-stone-600 mx-auto">
+            <p class="mt-4 max-w-2xl text-lg text-stone-600 mx-auto" data-edit-key="mainDesc">
                 본 가이드는 길드 공지사항을 바탕으로 칼페온 성의 특성을 반영하여 제작되었습니다. <br> 실전 피드백을 바탕으로 승리를 위한 최적의 전술을 공유합니다.
             </p>
         </section>
@@ -131,12 +154,12 @@
         <!-- Section 0: Data Analysis -->
         <section id="analysis-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">0. 길드 전력 분석: 리젠 vs 오리진</h2>
-                <p class="mt-2 text-stone-600">성공적인 공성/수성을 위해서는 피아의 전력 차이를 명확히 인지해야 합니다. 오리진 길드와의 전투력(CP) 비교 데이터를 바탕으로 전략의 방향성을 설정합니다.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec0Title">0. 길드 전력 분석: 리젠 vs 오리진</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec0Desc">성공적인 공성/수성을 위해서는 피아의 전력 차이를 명확히 인지해야 합니다. 오리진 길드와의 전투력(CP) 비교 데이터를 바탕으로 전략의 방향성을 설정합니다.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Detailed CP Table (원본 유지) -->
+                <!-- Detailed CP Table -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex flex-col">
                     <h3 class="text-lg font-bold text-stone-900 mb-4 text-center shrink-0">⚔️ 길드원 전투력 상세 비교표</h3>
                     
@@ -560,8 +583,8 @@
         <!-- Section 1: Strategic Nodes -->
         <section id="map-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">1. 주요 거점 및 전장 브리핑 (기동 타격)</h2>
-                <p class="mt-2 text-stone-600">칼페온 성은 진입로가 좌/우로 나뉘어 있습니다. 공성측의 <strong>'흑정령 탈출 급습'</strong>과 <strong>'부활 장소 전진 배치'</strong>라는 속전속결 전략에 맞춘 주요 거점 정보를 확인하세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec1Title">1. 주요 거점 및 전장 브리핑 (기동 타격)</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec1Desc">칼페온 성은 진입로가 좌/우로 나뉘어 있습니다. 공성측의 <strong>'흑정령 탈출 급습'</strong>과 <strong>'부활 장소 전진 배치'</strong>라는 속전속결 전략에 맞춘 주요 거점 정보를 확인하세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100">
@@ -696,8 +719,8 @@
         <!-- Section 2: Classes -->
         <section id="class-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">2. 공성전 핵심 클래스 티어 및 역할</h2>
-                <p class="mt-2 text-stone-600">다대다 전투의 특성상 단일 대상 딜링보다는 생존력, 광역 군중 제어(CC), 기동성이 중요합니다. 역할군을 선택하고 각 클래스의 능력치를 차트로 비교해보세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec2Title">2. 공성전 핵심 클래스 티어 및 역할</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec2Desc">다대다 전투의 특성상 단일 대상 딜링보다는 생존력, 광역 군중 제어(CC), 기동성이 중요합니다. 역할군을 선택하고 각 클래스의 능력치를 차트로 비교해보세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -745,8 +768,8 @@
         <!-- Section 3: Phase Strategy -->
         <section id="strategy-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">3. 단계별 공성/수성 전술 및 병기 활용</h2>
-                <p class="mt-2 text-stone-600">시간의 흐름에 따른 전장의 변화를 이해하고, 병기(아알의 심판, 대포 등)를 적재적소에 활용해야 합니다. 각 단계별 오더를 확인하세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec3Title">3. 단계별 공성/수성 전술 및 병기 활용</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec3Desc">시간의 흐름에 따른 전장의 변화를 이해하고, 병기(아알의 심판, 대포 등)를 적재적소에 활용해야 합니다. 각 단계별 오더를 확인하세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -797,10 +820,10 @@
         <!-- Section 4: AI Advisor (Gemini Integration) -->
         <section id="ai-advisor-section" class="scroll-mt-24 pb-12">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900 flex items-center gap-2">
-                    4. AI 작전 참모 <span class="text-2xl">✨</span>
+                <h2 class="text-3xl font-bold text-stone-900 flex items-center gap-2" data-edit-key="sec4Title">
+                    4. AI 작전 참모 ✨
                 </h2>
-                <p class="mt-2 text-stone-600">Gemini LLM이 현재 전황을 분석하여 실시간 맞춤 전술을 제안하거나, 길드원들에게 즉시 전파할 수 있는 오더(명령어)를 작성해 드립니다.</p>
+                <p class="mt-2 text-stone-600" data-edit-key="sec4Desc">Gemini LLM이 현재 전황을 분석하여 실시간 맞춤 전술을 제안하거나, 길드원들에게 즉시 전파할 수 있는 오더(명령어)를 작성해 드립니다.</p>
             </div>
 
             <div class="bg-gradient-to-br from-stone-900 to-stone-800 p-1 rounded-2xl shadow-lg">
@@ -850,9 +873,237 @@
 
     <footer class="bg-stone-900 py-12 mt-12">
         <div class="max-w-6xl mx-auto px-4 flex flex-col items-center gap-6">
-            <p class="text-stone-400 text-sm">본 가이드는 길드 공지사항과 피드백을 바탕으로 구성된 칼페온 공성전 전용 웹 어플리케이션입니다.</p>
+            <p class="text-stone-400 text-sm" data-edit-key="footerText">본 가이드는 길드 공지사항과 피드백을 바탕으로 구성된 칼페온 공성전 전용 웹 어플리케이션입니다.</p>
         </div>
     </footer>
+
+    <!-- Admin Panel (Floating) -->
+    <div id="adminPanel" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 items-end">
+        <div id="editControls" class="hidden bg-stone-800 p-3 rounded-xl border border-amber-600 shadow-xl flex-col gap-2 mb-2">
+            <div class="text-xs text-amber-400 font-bold mb-1 text-center border-b border-stone-600 pb-1">관리자 모드</div>
+            <button id="toggleEditBtn" class="bg-stone-700 hover:bg-stone-600 text-white text-sm px-4 py-2 rounded transition-colors w-full">수정 모드 켜기</button>
+            <button id="saveBtn" class="bg-amber-600 hover:bg-amber-500 text-white text-sm px-4 py-2 rounded transition-colors w-full font-bold hidden">변경사항 저장</button>
+        </div>
+        <button id="authBtn" class="bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-600 rounded-full px-4 py-2 text-sm shadow-lg transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-amber-500"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
+            <span id="authBtnText">관리자 로그인</span>
+        </button>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Firebase Admin Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const localFirebaseConfig = {
+            apiKey: "AIzaSyDBMdW3jEdkWn5SkyfWBu8mBSGgH365rhQ",
+            authDomain: "bdm-kharazad.firebaseapp.com",
+            projectId: "bdm-kharazad",
+            storageBucket: "bdm-kharazad.firebasestorage.app",
+            messagingSenderId: "191759462849",
+            appId: "1:191759462849:web:52c475f8db455ede547f40",
+            measurementId: "G-YL9CNGSPG9"
+        };
+
+        let firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
+        
+        // 💡 칼페온 가이드용 고유 App ID 적용 (데이터 분리용)
+        const validAppId = 'regen-guide-calpheon'; 
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const auth = getAuth(firebaseApp);
+        const db = getFirestore(firebaseApp);
+
+        // UI Elements
+        const authBtn = document.getElementById('authBtn');
+        const authBtnText = document.getElementById('authBtnText');
+        const editControls = document.getElementById('editControls');
+        const toggleEditBtn = document.getElementById('toggleEditBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const editableElements = document.querySelectorAll('[data-edit-key]');
+        const toastContainer = document.getElementById('toastContainer');
+
+        let isEditMode = false;
+        let isUserAdmin = false;
+        let unsubscribeSnapshot = null;
+
+        const getDocRef = () => doc(db, 'artifacts', validAppId, 'public', 'data', 'content', 'guide_page');
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `px-6 py-3 rounded-full shadow-xl text-sm font-bold text-white toast-enter ${isError ? 'bg-rose-600' : 'bg-green-600'}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(100%)';
+                toast.style.transition = 'all 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        const isLocalFile = window.location.protocol === 'file:';
+
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth init error:", error);
+            }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                isUserAdmin = false;
+                authBtnText.textContent = "관리자 로그인";
+                editControls.classList.add('hidden');
+                editControls.classList.remove('flex');
+                if (isEditMode) toggleEditMode();
+                if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
+                return;
+            }
+
+            const isGoogleLogin = user.providerData && user.providerData.some(p => p.providerId === 'google.com');
+
+            if (isGoogleLogin) {
+                const emailStr = user.email ? String(user.email).trim() : "";
+                if (!emailStr) {
+                    await signOut(auth);
+                    await initAuth(); 
+                    showToast("이메일 정보가 없어 접근이 거부되었습니다.", true);
+                    return;
+                }
+
+                try {
+                    const adminDocRef = doc(db, 'allowed_users', emailStr);
+                    const adminSnap = await getDoc(adminDocRef);
+
+                    if (adminSnap.exists()) {
+                        isUserAdmin = true;
+                        authBtnText.textContent = "로그아웃";
+                        editControls.classList.remove('hidden');
+                        editControls.classList.add('flex');
+                        showToast("관리자 계정으로 인증되었습니다.");
+                    } else {
+                        await signOut(auth);
+                        await initAuth();
+                        showToast("승인된 관리자 계정이 아닙니다.", true);
+                        return; 
+                    }
+                } catch (error) {
+                    console.error("관리자 권한 확인 오류:", error);
+                    await signOut(auth);
+                    await initAuth();
+                    showToast("권한 확인 중 오류가 발생했습니다.", true);
+                    return;
+                }
+            } else {
+                isUserAdmin = false;
+                authBtnText.textContent = "관리자 로그인";
+                editControls.classList.add('hidden');
+                editControls.classList.remove('flex');
+                if (isEditMode) toggleEditMode(); 
+            }
+
+            if (!unsubscribeSnapshot && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                try {
+                    unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            editableElements.forEach(el => {
+                                const key = el.getAttribute('data-edit-key');
+                                if (data[key] !== undefined) { el.textContent = data[key]; }
+                            });
+                        }
+                    }, (error) => {
+                        console.warn("Firestore 권한 오류 무시:", error);
+                    });
+                } catch (syncError) {
+                    console.error("동기화 설정 오류:", syncError);
+                }
+            }
+        });
+
+        authBtn.addEventListener('click', async () => {
+            if (isLocalFile) {
+                showToast("구글 로그인은 웹 서버(GitHub Pages 등)에서만 작동합니다.", true);
+                return;
+            }
+
+            if (isUserAdmin) {
+                try {
+                    await signOut(auth);
+                    await initAuth(); 
+                    showToast("로그아웃 되었습니다.");
+                } catch (error) { showToast("로그아웃 실패", true); }
+            } else {
+                const provider = new GoogleAuthProvider();
+                try {
+                    showToast("계정 권한을 확인 중입니다...");
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    if (error.code === 'auth/unauthorized-domain') {
+                        showToast("Firebase 콘솔에서 승인된 도메인에 추가해주세요.", true);
+                    } else { showToast("로그인 취소 또는 권한이 없습니다.", true); }
+                }
+            }
+        });
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            if (isEditMode) {
+                toggleEditBtn.textContent = "수정 모드 끄기";
+                toggleEditBtn.classList.replace('bg-stone-700', 'bg-rose-700');
+                toggleEditBtn.classList.replace('hover:bg-stone-600', 'hover:bg-rose-600');
+                saveBtn.classList.remove('hidden');
+                
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+                showToast("수정 모드가 켜졌습니다. 텍스트를 클릭하여 수정하세요.");
+            } else {
+                toggleEditBtn.textContent = "수정 모드 켜기";
+                toggleEditBtn.classList.replace('bg-rose-700', 'bg-stone-700');
+                toggleEditBtn.classList.replace('hover:bg-rose-600', 'hover:bg-stone-600');
+                saveBtn.classList.add('hidden');
+                
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+            }
+        }
+
+        toggleEditBtn.addEventListener('click', toggleEditMode);
+
+        saveBtn.addEventListener('click', async () => {
+            if (!isUserAdmin) return;
+            
+            const newData = {};
+            editableElements.forEach(el => {
+                const key = el.getAttribute('data-edit-key');
+                newData[key] = el.textContent.trim(); 
+            });
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = "저장 중...";
+
+            try {
+                await setDoc(getDocRef(), newData, { merge: true });
+                showToast("변경사항이 성공적으로 저장되었습니다.");
+                toggleEditMode();
+            } catch (error) {
+                showToast("저장에 실패했습니다. 권한을 확인하세요.", true);
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = "변경사항 저장";
+            }
+        });
+    </script>
 
     <!-- Application Logic -->
     <script>
@@ -982,7 +1233,7 @@
                   tips: ['타이탄과 함께 최전방에 서서 무적기로 적의 1차 화력 흡수', '다리 같은 병목 구간에서 거대한 범위 공격으로 적 진입 차단'] },
                 { id: 'eclipse', name: '이클립스', role: 'melee', roleName: '절대 방어/수성', stats: [70, 100, 75, 60, 65], 
                   desc: '수성 시 전방가드와 후방 슈퍼아머, 그리고 "잡기 불가" 판정이 모두 적용된 "명령: 얼음의 방진" 스킬을 사용하여 전선 유지에 탁월한 성능을 발휘합니다. 적의 타이탄이나 진입형 딜러를 상대로 가장 완벽한 방패가 됩니다.',
-                  tips: ['다리 입구나 성문 앞 좁은 길목에서 "얼음의 방진"을 사용하여 진입 및 잡기 완벽 차단', '무극과 함께 최전방 수비 라인을 구축하여 공성측의 접근 봉쇄'] },
+                  tips: ['다리 입구나 성문 앞 좁은 길목에서 "얼음의 방진"을 사용하여 진입 및 잡기 완벽 차단', '무극과 함께 최전방 수비 라 구축하여 공성측의 접근 봉쇄'] },
                 { id: 'sage', name: '세이지', role: 'ranged', roleName: '공간장악/폭격', stats: [90, 70, 95, 85, 75], 
                   desc: '시공간을 제어하는 무적 이동기(균열)와 긴 사거리의 마법으로 변수를 창출합니다. 전방 가드를 단숨에 깨는 능력이 탁월해 뭉쳐있는 수성 진형의 방어선을 무너뜨리는 데 최적화되어 있습니다.',
                   tips: ['무적 시공간 이동으로 안전한 위치 선점 후 적 밀집 구역 광역 폭격', '상대의 전방 가드 유지 타이밍을 노려 카운터 딜링'] },

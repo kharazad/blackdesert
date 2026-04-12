@@ -63,6 +63,29 @@
             font-weight: 700;
         }
 
+        /* Editable Field Styles */
+        [contenteditable="true"] {
+            outline: 2px dashed #d97706;
+            background-color: rgba(217, 119, 6, 0.15);
+            border-radius: 4px;
+            padding: 2px 4px;
+            cursor: text;
+            transition: background-color 0.2s;
+        }
+        [contenteditable="true"]:focus {
+            background-color: rgba(217, 119, 6, 0.3);
+            outline: 2px solid #f59e0b;
+        }
+
+        /* Toast Animation */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast-enter {
+            animation: slideUp 0.3s ease-out forwards;
+        }
+
         /* AI Loader */
         .loader {
             border: 3px solid #f3f4f6;
@@ -106,31 +129,28 @@
         <!-- Hero Section -->
         <section class="text-center py-12 md:py-20">
             <h1 class="text-4xl md:text-5xl font-black text-stone-900 mb-6 leading-tight">
-                <span class="text-amber-600">발렌시아 공성전 핵심 가이드</span>
+                <span class="text-amber-600" data-edit-key="mainTitle">발렌시아 공성전 핵심 가이드</span>
             </h1>
-            <p class="mt-4 max-w-2xl text-lg text-stone-600 mx-auto">
-                본 가이드는 길드 공지사항과 길드원들의 소중한 실전 피드백을 바탕으로 제작되었습니다. 지속적인 업데이트를 통해 승리를 위한 최적의 전술을 공유합니다.
+            <p class="mt-4 max-w-2xl text-lg text-stone-600 mx-auto" data-edit-key="mainDesc">
+                본 가이드는 길드 공지사항과 길드원들의 소중한 실전 피드백을 바탕으로 제작되었습니다. 지속적인 업데이트를 통해 승리를 위한 최적 전술을 공유합니다.
             </p>
         </section>
 
         <!-- Section 0: Data Analysis -->
         <section id="analysis-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">0. 길드 전력 분석: 리젠 vs 청플</h2>
-                <p class="mt-2 text-stone-600">성공적인 공성/수성을 위해서는 피아의 전력 차이를 명확히 인지해야 합니다. 청플 길드와의 전투력(CP) 비교 데이터를 바탕으로 전략의 방향성을 설정합니다.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec0Title">0. 길드 전력 분석: 리젠 vs 청플</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec0Desc">성공적인 공성/수성을 위해서는 피아의 전력 차이를 명확히 인지해야 합니다. 청플 길드와의 전투력(CP) 비교 데이터를 바탕으로 전략의 방향성을 설정합니다.</p>
             </div>
 
-            <!-- Removed items-stretch to rely on natural grid track sizing -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Detailed CP Table (Recreated in HTML/CSS) -->
+                <!-- Detailed CP Table -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 flex flex-col">
                     <h3 class="text-lg font-bold text-stone-900 mb-4 text-center shrink-0">⚔️ 길드원 전투력 상세 비교표</h3>
                     
-                    <!-- 높이를 우측 요소와 완벽히 맞추기 위한 절대좌표(Absolute) 격리 래퍼 추가 -->
                     <div class="relative w-full flex-1 min-h-[400px] lg:min-h-0">
                         <div class="absolute inset-0 overflow-y-auto rounded-lg border border-stone-300 shadow-inner bg-stone-50">
                             <table class="w-full text-xs sm:text-sm text-center border-collapse relative">
-                                <!-- Increased z-index and added background to sticky header for clean scrolling -->
                                 <thead class="sticky top-0 shadow-md z-20">
                                     <tr>
                                         <th class="border-b border-r border-stone-300 px-1 py-2 text-stone-600 font-bold bg-stone-200">No</th>
@@ -142,428 +162,382 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-stone-800 font-medium">
-                                    <!-- Row 1 -->
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">1</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">청춘만세</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">137,560</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +3,926</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">서버이전</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">133,634</td>
-                                </tr>
-                                <!-- Row 2 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">2</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카이그린</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,257</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +159</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">그런사람몰라요</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">132,416</td>
-                                </tr>
-                                <!-- Row 3 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">3</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">하이큐</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,256</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +459</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">여수찬바다</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">131,797</td>
-                                </tr>
-                                <!-- Row 4 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">4</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠뮤직</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">130,481</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,309</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">플찬</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">129,172</td>
-                                </tr>
-                                <!-- Row 5 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">5</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">극의</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">127,116</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,299</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">크립토</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">128,415</td>
-                                </tr>
-                                <!-- Row 6 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">6</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">광용</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,813</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +197</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">대칸</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">126,616</td>
-                                </tr>
-                                <!-- Row 7 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">7</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">치치코코</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,454</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,610</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">슈크림채니</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">124,844</td>
-                                </tr>
-                                <!-- Row 8 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">8</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">경휘</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,224</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,611</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">아이리스</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">124,613</td>
-                                </tr>
-                                <!-- Row 9 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">9</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">야마토</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,900</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +566</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">생크림채니</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">124,466</td>
-                                </tr>
-                                <!-- Row 10 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">10</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">탄Is</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,502</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +832</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">본주</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">122,670</td>
-                                </tr>
-                                <!-- Row 11 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">11</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">콕님</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">122,418</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +235</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">킬각</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">122,183</td>
-                                </tr>
-                                <!-- Row 12 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">12</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도천류</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,875</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,433</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">ILEZRA</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">119,442</td>
-                                </tr>
-                                <!-- Row 13 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">13</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라이텐</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,467</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,265</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">슈턴</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">119,202</td>
-                                </tr>
-                                <!-- Row 14 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">14</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">슉님</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,594</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +439</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">8토향기</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">119,155</td>
-                                </tr>
-                                <!-- Row 15 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">15</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">XIGNCODE</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,070</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +62</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">더러운개</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">119,132</td>
-                                </tr>
-                                <!-- Row 16 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">16</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">찬아</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,720</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,193</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">어머나다어머나</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">118,913</td>
-                                </tr>
-                                <!-- Row 17 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">17</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">덩치</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,419</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,060</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">이거니</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">118,479</td>
-                                </tr>
-                                <!-- Row 18 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">18</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Rundeseki</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,250</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,047</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">넉백</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">118,297</td>
-                                </tr>
-                                <!-- Row 19 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">19</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">헤라냥</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">116,485</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +367</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">손자</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">116,118</td>
-                                </tr>
-                                <!-- Row 20 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">20</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">매타몽</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">115,156</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +924</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">SULEX</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">116,080</td>
-                                </tr>
-                                <!-- Row 21 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">21</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">뮤츠</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">114,602</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,371</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">포도</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">115,973</td>
-                                </tr>
-                                <!-- Row 22 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">22</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">꼬리v</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,801</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,147</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">인팁</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">115,948</td>
-                                </tr>
-                                <!-- Row 23 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">23</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">나님</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,786</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,840</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">이네이트</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">115,626</td>
-                                </tr>
-                                <!-- Row 24 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">24</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">KHARAZAD</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,587</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +949</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">마테김</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">114,536</td>
-                                </tr>
-                                <!-- Row 25 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">25</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">허키</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,552</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +910</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">올리브s</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">114,462</td>
-                                </tr>
-                                <!-- Row 26 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">26</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠필드</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,458</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +760</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">쪼꼴렛</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">114,218</td>
-                                </tr>
-                                <!-- Row 27 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">27</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">은귤</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,147</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +437</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">쪼렙</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">112,710</td>
-                                </tr>
-                                <!-- Row 28 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">28</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">발렌타인</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,923</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +588</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">메두사</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">112,511</td>
-                                </tr>
-                                <!-- Row 29 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">29</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">금니</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,351</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +986</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">생크림왕자</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">112,337</td>
-                                </tr>
-                                <!-- Row 30 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">30</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">정사시미</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,305</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +627</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">원투</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">111,932</td>
-                                </tr>
-                                <!-- Row 31 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">31</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">챠홍</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,219</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +376</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">개토끼</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">111,595</td>
-                                </tr>
-                                <!-- Row 32 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">32</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">GODDOK</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,713</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,877</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">푸긴</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">111,590</td>
-                                </tr>
-                                <!-- Row 33 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">33</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">인시</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,672</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,680</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">뽀샤버려</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">111,352</td>
-                                </tr>
-                                <!-- Row 34 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">34</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Czar</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,085</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,213</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">달콤하게</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">111,298</td>
-                                </tr>
-                                <!-- Row 35 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">35</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">구찬성</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,046</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,591</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">동무</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">110,637</td>
-                                </tr>
-                                <!-- Row 36 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">36</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">더딘냇물</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,529</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,083</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">홍콩할매</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">110,612</td>
-                                </tr>
-                                <!-- Row 37 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">37</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">츄르줄게야옹해바</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,403</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,701</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">SGT</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">110,104</td>
-                                </tr>
-                                <!-- Row 38 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">38</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">ll름ll</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,160</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,357</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">앵두는개</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">109,517</td>
-                                </tr>
-                                <!-- Row 39 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">39</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠순냥</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,115</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,297</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">Flex붉은여우</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">109,412</td>
-                                </tr>
-                                <!-- Row 40 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">40</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">녕결</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,379</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,828</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">라모야</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">109,207</td>
-                                </tr>
-                                <!-- Row 41 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">41</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라임처럼</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,151</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,913</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">MyBoo</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">109,064</td>
-                                </tr>
-                                <!-- Row 42 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">42</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카란다</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,832</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,972</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">좀비</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">108,804</td>
-                                </tr>
-                                <!-- Row 43 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">43</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">얘들아까꿍</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,329</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,878</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">작살순수</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">108,207</td>
-                                </tr>
-                                <!-- Row 44 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">44</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도구로</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,278</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,566</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">카엘</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">107,844</td>
-                                </tr>
-                                <!-- Row 45 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">45</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">강하</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,020</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,767</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">새로운개</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">106,787</td>
-                                </tr>
-                                <!-- Row 46 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">46</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">요네</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">103,704</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,850</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">박노인</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">106,554</td>
-                                </tr>
-                                <!-- Row 47 -->
-                                <tr class="border-b border-stone-200">
-                                    <td class="border-r border-stone-200 py-1.5 bg-white">47</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">써브캐릭터</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">99,135</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +7,100</td>
-                                    <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">시라누이마이</td>
-                                    <td class="py-1.5 bg-[#f0f7ff]">106,235</td>
-                                    <!-- Row 48 -->
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">1</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">청춘만세</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">137,560</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +3,926</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">서버이전</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">133,634</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">2</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카이그린</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,257</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +159</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">그런사람몰라요</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">132,416</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">3</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">하이큐</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,256</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +459</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">여수찬바다</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">131,797</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">4</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠뮤직</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">130,481</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,309</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">플찬</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">129,172</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">5</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">극의</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">127,116</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,299</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">크립토</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">128,415</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">6</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">광용</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,813</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +197</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">대칸</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">126,616</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">7</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">치치코코</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,454</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,610</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">슈크림채니</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">124,844</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">8</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">경휘</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,224</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,611</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">아이리스</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">124,613</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">9</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">야마토</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,900</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +566</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">생크림채니</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">124,466</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">10</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">탄Is</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,502</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +832</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">본주</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">122,670</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">11</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">콕님</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">122,418</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +235</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">킬각</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">122,183</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">12</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도천류</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,875</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,433</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">ILEZRA</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">119,442</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">13</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라이텐</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,467</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,265</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">슈턴</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">119,202</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">14</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">슉님</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,594</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +439</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">8토향기</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">119,155</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">15</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">XIGNCODE</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,070</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +62</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">더러운개</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">119,132</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">16</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">찬아</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,720</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,193</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">어머나다어머나</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">118,913</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">17</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">덩치</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,419</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,060</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">이거니</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">118,479</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">18</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Rundeseki</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,250</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,047</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">넉백</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">118,297</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">19</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">헤라냥</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">116,485</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +367</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">손자</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">116,118</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">20</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">매타몽</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">115,156</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +924</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">SULEX</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">116,080</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">21</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">뮤츠</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">114,602</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,371</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">포도</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">115,973</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">22</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">꼬리v</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,801</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,147</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">인팁</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">115,948</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">23</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">나님</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,786</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,840</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">이네이트</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">115,626</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">24</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">KHARAZAD</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,587</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +949</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">마테김</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">114,536</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">25</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">허키</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,552</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +910</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">올리브s</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">114,462</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">26</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠필드</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,458</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +760</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">쪼꼴렛</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">114,218</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">27</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">은귤</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,147</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +437</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">쪼렙</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">112,710</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">28</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">발렌타인</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,923</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +588</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">메두사</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">112,511</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">29</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">금니</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,351</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +986</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">생크림왕자</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">112,337</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">30</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">정사시미</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,305</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +627</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">원투</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">111,932</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">31</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">챠홍</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,219</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +376</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">개토끼</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">111,595</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">32</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">GODDOK</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,713</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,877</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">푸긴</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">111,590</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">33</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">인시</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,672</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,680</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">뽀샤버려</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">111,352</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">34</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Czar</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,085</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,213</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">달콤하게</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">111,298</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">35</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">구찬성</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,046</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,591</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">동무</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">110,637</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">36</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">더딘냇물</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,529</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,083</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">홍콩할매</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">110,612</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">37</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">츄르줄게야옹해바</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,403</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,701</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">SGT</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">110,104</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">38</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">ll름ll</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,160</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,357</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">앵두는개</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">109,517</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">39</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠순냥</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,115</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,297</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">Flex붉은여우</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">109,412</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">40</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">녕결</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,379</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,828</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">라모야</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">109,207</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">41</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라임처럼</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,151</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,913</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">MyBoo</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">109,064</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">42</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카란다</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,832</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,972</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">좀비</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">108,804</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">43</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">얘들아까꿍</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,329</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,878</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">작살순수</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">108,207</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">44</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도구로</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,278</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,566</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">카엘</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">107,844</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">45</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">강하</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,020</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +1,767</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">새로운개</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">106,787</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">46</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">요네</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">103,704</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +2,850</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">박노인</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">106,554</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-200">
+                                        <td class="border-r border-stone-200 py-1.5 bg-white">47</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">써브캐릭터</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">99,135</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff] text-sky-700">청플 +7,100</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#f0f7ff]">시라누이마이</td>
+                                        <td class="py-1.5 bg-[#f0f7ff]">106,235</td>
+                                    </tr>
                                     <tr class="border-b border-stone-200">
                                         <td class="border-r border-stone-200 py-1.5 bg-white">48</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">겨울에흩날리는눈</td>
@@ -602,8 +576,8 @@
         <!-- Section 1: Strategic Nodes -->
         <section id="map-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">1. 주요 거점(부활) 및 전장 브리핑</h2>
-                <p class="mt-2 text-stone-600">발렌시아 성은 수성측과 공성측의 부활 포인트(거점) 거리에 따른 동선 차이가 승패에 큰 영향을 미칩니다. 지도 위의 숫자 노드나 하단의 버튼을 클릭하여 각 지역의 전술적 가치를 확인하세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec1Title">1. 주요 거점(부활) 및 전장 브리핑</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec1Desc">발렌시아 성은 수성측과 공성측의 부활 포인트(거점) 거리에 따른 동선 차이가 승패에 큰 영향을 미칩니다. 지도 위의 숫자 노드나 하단의 버튼을 클릭하여 각 지역의 전술적 가치를 확인하세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-stone-100">
@@ -741,8 +715,8 @@
         <!-- Section 2: Classes -->
         <section id="class-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">2. 공성전 핵심 클래스 티어 및 역할</h2>
-                <p class="mt-2 text-stone-600">다대다 전투의 특성상 단일 대상 딜링보다는 생존력, 광역 군중 제어(CC), 기동성이 중요합니다. 역할군을 선택하고 각 클래스의 능력치를 레이더 차트로 비교해보세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec2Title">2. 공성전 핵심 클래스 티어 및 역할</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec2Desc">다대다 전투의 특성상 단일 대상 딜링보다는 생존력, 광역 군중 제어(CC), 기동성이 중요합니다. 역할군을 선택하고 각 클래스의 능력치를 차트로 비교해보세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -790,8 +764,8 @@
         <!-- Section 3: Phase Strategy -->
         <section id="strategy-section" class="scroll-mt-24">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900">3. 단계별 공성/수성 전술 및 병기 활용</h2>
-                <p class="mt-2 text-stone-600">시간의 흐름에 따른 전장의 변화를 이해하고, 병기(아알의 심판, 대포 등)를 적재적소에 활용해야 합니다. 각 단계별 오더를 확인하세요.</p>
+                <h2 class="text-3xl font-bold text-stone-900" data-edit-key="sec3Title">3. 단계별 공성/수성 전술 및 병기 활용</h2>
+                <p class="mt-2 text-stone-600" data-edit-key="sec3Desc">시간의 흐름에 따른 전장의 변화를 이해하고, 병기(아알의 심판, 대포 등)를 적재적소에 활용해야 합니다. 각 단계별 오더를 확인하세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -842,10 +816,10 @@
         <!-- Section 4: AI Advisor (Gemini Integration) -->
         <section id="ai-advisor-section" class="scroll-mt-24 pb-12">
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-stone-900 flex items-center gap-2">
-                    4. AI 작전 참모 <span class="text-2xl">✨</span>
+                <h2 class="text-3xl font-bold text-stone-900 flex items-center gap-2" data-edit-key="sec4Title">
+                    4. AI 작전 참모 ✨
                 </h2>
-                <p class="mt-2 text-stone-600">Gemini LLM이 현재 전황을 분석하여 실시간 맞춤 전술을 제안하거나, 길드원들에게 즉시 전파할 수 있는 오더(명령어)를 작성해 드립니다.</p>
+                <p class="mt-2 text-stone-600" data-edit-key="sec4Desc">Gemini LLM이 현재 전황을 분석하여 실시간 맞춤 전술을 제안하거나, 길드원들에게 즉시 전파할 수 있는 오더(명령어)를 작성해 드립니다.</p>
             </div>
 
             <div class="bg-gradient-to-br from-stone-900 to-stone-800 p-1 rounded-2xl shadow-lg">
@@ -895,9 +869,237 @@
 
     <footer class="bg-stone-900 py-12 mt-12">
         <div class="max-w-6xl mx-auto px-4 flex flex-col items-center gap-6">
-            <p class="text-stone-400 text-sm">본 가이드는 길드 공지사항과 피드백을 바탕으로 구성된 전략 웹 어플리케이션입니다.</p>
+            <p class="text-stone-400 text-sm" data-edit-key="footerText">본 가이드는 길드 공지사항과 피드백을 바탕으로 구성된 전략 웹 어플리케이션입니다.</p>
         </div>
     </footer>
+
+    <!-- Admin Panel (Floating) -->
+    <div id="adminPanel" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 items-end">
+        <div id="editControls" class="hidden bg-stone-800 p-3 rounded-xl border border-amber-600 shadow-xl flex-col gap-2 mb-2">
+            <div class="text-xs text-amber-400 font-bold mb-1 text-center border-b border-stone-600 pb-1">관리자 모드</div>
+            <button id="toggleEditBtn" class="bg-stone-700 hover:bg-stone-600 text-white text-sm px-4 py-2 rounded transition-colors w-full">수정 모드 켜기</button>
+            <button id="saveBtn" class="bg-amber-600 hover:bg-amber-500 text-white text-sm px-4 py-2 rounded transition-colors w-full font-bold hidden">변경사항 저장</button>
+        </div>
+        <button id="authBtn" class="bg-stone-800 hover:bg-stone-700 text-stone-300 border border-stone-600 rounded-full px-4 py-2 text-sm shadow-lg transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-amber-500"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" /></svg>
+            <span id="authBtnText">관리자 로그인</span>
+        </button>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Firebase Admin Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const localFirebaseConfig = {
+            apiKey: "AIzaSyDBMdW3jEdkWn5SkyfWBu8mBSGgH365rhQ",
+            authDomain: "bdm-kharazad.firebaseapp.com",
+            projectId: "bdm-kharazad",
+            storageBucket: "bdm-kharazad.firebasestorage.app",
+            messagingSenderId: "191759462849",
+            appId: "1:191759462849:web:52c475f8db455ede547f40",
+            measurementId: "G-YL9CNGSPG9"
+        };
+
+        let firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
+        
+        // 💡 발렌시아 가이드용 고유 App ID 적용 (데이터가 섞이지 않도록 분리)
+        const validAppId = 'regen-guide-valencia'; 
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const auth = getAuth(firebaseApp);
+        const db = getFirestore(firebaseApp);
+
+        // UI Elements
+        const authBtn = document.getElementById('authBtn');
+        const authBtnText = document.getElementById('authBtnText');
+        const editControls = document.getElementById('editControls');
+        const toggleEditBtn = document.getElementById('toggleEditBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const editableElements = document.querySelectorAll('[data-edit-key]');
+        const toastContainer = document.getElementById('toastContainer');
+
+        let isEditMode = false;
+        let isUserAdmin = false;
+        let unsubscribeSnapshot = null;
+
+        const getDocRef = () => doc(db, 'artifacts', validAppId, 'public', 'data', 'content', 'guide_page');
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `px-6 py-3 rounded-full shadow-xl text-sm font-bold text-white toast-enter ${isError ? 'bg-rose-600' : 'bg-green-600'}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(100%)';
+                toast.style.transition = 'all 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        const isLocalFile = window.location.protocol === 'file:';
+
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth init error:", error);
+            }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                isUserAdmin = false;
+                authBtnText.textContent = "관리자 로그인";
+                editControls.classList.add('hidden');
+                editControls.classList.remove('flex');
+                if (isEditMode) toggleEditMode();
+                if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
+                return;
+            }
+
+            const isGoogleLogin = user.providerData && user.providerData.some(p => p.providerId === 'google.com');
+
+            if (isGoogleLogin) {
+                const emailStr = user.email ? String(user.email).trim() : "";
+                if (!emailStr) {
+                    await signOut(auth);
+                    await initAuth(); 
+                    showToast("이메일 정보가 없어 접근이 거부되었습니다.", true);
+                    return;
+                }
+
+                try {
+                    const adminDocRef = doc(db, 'allowed_users', emailStr);
+                    const adminSnap = await getDoc(adminDocRef);
+
+                    if (adminSnap.exists()) {
+                        isUserAdmin = true;
+                        authBtnText.textContent = "로그아웃";
+                        editControls.classList.remove('hidden');
+                        editControls.classList.add('flex');
+                        showToast("관리자 계정으로 인증되었습니다.");
+                    } else {
+                        await signOut(auth);
+                        await initAuth();
+                        showToast("승인된 관리자 계정이 아닙니다.", true);
+                        return; 
+                    }
+                } catch (error) {
+                    console.error("관리자 권한 확인 오류:", error);
+                    await signOut(auth);
+                    await initAuth();
+                    showToast("권한 확인 중 오류가 발생했습니다.", true);
+                    return;
+                }
+            } else {
+                isUserAdmin = false;
+                authBtnText.textContent = "관리자 로그인";
+                editControls.classList.add('hidden');
+                editControls.classList.remove('flex');
+                if (isEditMode) toggleEditMode(); 
+            }
+
+            if (!unsubscribeSnapshot && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                try {
+                    unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            editableElements.forEach(el => {
+                                const key = el.getAttribute('data-edit-key');
+                                if (data[key] !== undefined) { el.textContent = data[key]; }
+                            });
+                        }
+                    }, (error) => {
+                        console.warn("Firestore 읽기 권한이 없거나 동기화 오류가 발생했습니다:", error);
+                    });
+                } catch (syncError) {
+                    console.error("데이터 동기화 설정 오류:", syncError);
+                }
+            }
+        });
+
+        authBtn.addEventListener('click', async () => {
+            if (isLocalFile) {
+                showToast("구글 로그인은 웹 서버(GitHub Pages 등)에서만 작동합니다.", true);
+                return;
+            }
+
+            if (isUserAdmin) {
+                try {
+                    await signOut(auth);
+                    await initAuth(); 
+                    showToast("로그아웃 되었습니다.");
+                } catch (error) { showToast("로그아웃 실패", true); }
+            } else {
+                const provider = new GoogleAuthProvider();
+                try {
+                    showToast("계정 권한을 확인 중입니다...");
+                    await signInWithPopup(auth, provider);
+                } catch (error) {
+                    if (error.code === 'auth/unauthorized-domain') {
+                        showToast("Firebase 콘솔에서 승인된 도메인에 추가해주세요.", true);
+                    } else { showToast("로그인 취소 또는 권한이 없습니다.", true); }
+                }
+            }
+        });
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            if (isEditMode) {
+                toggleEditBtn.textContent = "수정 모드 끄기";
+                toggleEditBtn.classList.replace('bg-stone-700', 'bg-rose-700');
+                toggleEditBtn.classList.replace('hover:bg-stone-600', 'hover:bg-rose-600');
+                saveBtn.classList.remove('hidden');
+                
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+                showToast("수정 모드가 켜졌습니다. 텍스트를 클릭하여 수정하세요.");
+            } else {
+                toggleEditBtn.textContent = "수정 모드 켜기";
+                toggleEditBtn.classList.replace('bg-rose-700', 'bg-stone-700');
+                toggleEditBtn.classList.replace('hover:bg-rose-600', 'hover:bg-stone-600');
+                saveBtn.classList.add('hidden');
+                
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+            }
+        }
+
+        toggleEditBtn.addEventListener('click', toggleEditMode);
+
+        saveBtn.addEventListener('click', async () => {
+            if (!isUserAdmin) return;
+            
+            const newData = {};
+            editableElements.forEach(el => {
+                const key = el.getAttribute('data-edit-key');
+                newData[key] = el.textContent.trim(); 
+            });
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = "저장 중...";
+
+            try {
+                await setDoc(getDocRef(), newData, { merge: true });
+                showToast("변경사항이 성공적으로 저장되었습니다.");
+                toggleEditMode();
+            } catch (error) {
+                showToast("저장에 실패했습니다. 권한을 확인하세요.", true);
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = "변경사항 저장";
+            }
+        });
+    </script>
 
     <!-- Application Logic -->
     <script>
