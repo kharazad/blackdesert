@@ -242,17 +242,16 @@
         import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // =========================================================================
-        // 💡 중요: Github Pages(로컬)에서 로그인과 DB 수정을 활성화하려면
-        // Firebase Console(console.firebase.google.com)에서 프로젝트를 만들고 
-        // 아래 localFirebaseConfig 의 내용을 본인의 정보로 채워주셔야 합니다.
+        // 적용된 Firebase 정보입니다.
         // =========================================================================
         const localFirebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDBMdW3jEdkWn5SkyfWBu8mBSGgH365rhQ",
+            authDomain: "bdm-kharazad.firebaseapp.com",
+            projectId: "bdm-kharazad",
+            storageBucket: "bdm-kharazad.firebasestorage.app",
+            messagingSenderId: "191759462849",
+            appId: "1:191759462849:web:52c475f8db455ede547f40",
+            measurementId: "G-YL9CNGSPG9"
         };
 
         let firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
