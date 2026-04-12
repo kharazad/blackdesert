@@ -562,8 +562,8 @@
                         </div>
                     </div>
                     <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200">
-                        <h4 class="font-bold text-amber-800 mb-2">💡 전력 기반 핵심 수성 전략</h4>
-                        <ul class="list-disc list-inside text-sm text-stone-700 space-y-2">
+                        <h4 class="font-bold text-amber-800 mb-2" data-edit-key="insightTitle">💡 전력 기반 핵심 수성 전략</h4>
+                        <ul class="list-disc list-inside text-sm text-stone-700 space-y-2" data-edit-key="insightList">
                             <li><strong>리젠의 강점 (최상위 투력):</strong> 13.7만~13.2만 구간의 최상위 유저를 앞세워 한타 교전 시 적의 허리를 끊어내는 역할을 수행해야 합니다.</li>
                             <li><strong>청플의 강점 (탄탄한 평균층):</strong> 청플은 평균 투력(11.6만)과 최저 투력(10.5만)이 리젠보다 높아 다수결의 난전 및 장기전에 강합니다.</li>
                             <li><strong>대 청플 수성 특화 전술:</strong> 청플의 두터운 중위권 병력이 한꺼번에 진입하는 것을 막기 위해, <strong>'무극' 클래스들이 전방에 서서 '파훼' 스킬을 연계해 다리와 성문 같은 좁은 길목을 철통같이 봉쇄</strong>해야 합니다. 이와 병행하여 <strong>'타이탄'은 방어벽 뒤에 대기하다가 적의 핵심 고투력 유저를 '잡기' 스킬로 낚아채어 아군 화력망 중앙으로 '배달(납치)'</strong>하여 확실히 잘라먹는 전술이 수성 성공의 열쇠입니다.</li>
@@ -664,7 +664,7 @@
                         </div>
 
                         <!-- 외곽 거점 (Extra Features) -->
-                        <div class="css-map-point flex items-center justify-center absolute top-[65%] left-4 cursor-pointer z-10" data-target="outpost-west">
+                        <div class="css-map-point flex items-center justify-center absolute top-[65%] left-4 cursor-pointer z-10" data-target="outpost-east">
                             <div class="map-circle w-auto px-1.5 h-6 bg-stone-800 text-white rounded-sm flex items-center justify-center font-bold text-[10px] border border-stone-500 relative shadow-md">서쪽 외곽
                                 <span class="absolute top-full mt-1 text-[9px] font-medium text-stone-300 whitespace-nowrap">대포 지원</span>
                             </div>
@@ -686,9 +686,9 @@
                     <!-- Interactive Buttons -->
                     <div class="flex flex-wrap justify-center gap-2 w-full mt-2">
                         <button class="map-node-btn active px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs sm:text-sm border-2 border-blue-500" data-target="def-spawn">수성 거점</button>
-                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="artifact">성물(4)</button>
+                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="artifact">성물(4)</button>
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="gates">성문(2,3)</button>
-                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="atk-spawn">공성 거점</button>
+                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-green-100 text-green-800 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="atk-spawn">공성 거점</button>
                         <div class="w-full h-0"></div> <!-- Line break for outposts -->
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-xs sm:text-sm border-2 border-transparent" data-target="outpost-east">동/서쪽 외곽</button>
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs sm:text-sm border-2 border-amber-500 shadow-sm" data-target="outpost-south">남쪽 외곽(오우거)</button>
@@ -807,7 +807,7 @@
                         <canvas id="resourceChart"></canvas>
                     </div>
                     <div class="mt-4 text-sm text-stone-600 text-center">
-                        <p>공성측은 <strong>아알의 심판</strong>을 활용해 적의 단단한 수비 라인을 단숨에 돌파하는 것이 핵심입니다.</p>
+                        <p data-edit-key="resourceChartDesc">공성측은 <strong>아알의 심판</strong>을 활용해 적의 단단한 수비 라인을 단숨에 돌파하는 것이 핵심입니다.</p>
                     </div>
                 </div>
             </div>
@@ -895,6 +895,7 @@
         import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Firebase 설정 (관리자 기능)
         const localFirebaseConfig = {
             apiKey: "AIzaSyDBMdW3jEdkWn5SkyfWBu8mBSGgH365rhQ",
             authDomain: "bdm-kharazad.firebaseapp.com",
@@ -920,11 +921,12 @@
         const editControls = document.getElementById('editControls');
         const toggleEditBtn = document.getElementById('toggleEditBtn');
         const saveBtn = document.getElementById('saveBtn');
-        const editableElements = document.querySelectorAll('[data-edit-key]');
         const toastContainer = document.getElementById('toastContainer');
 
-        let isEditMode = false;
-        let isUserAdmin = false;
+        // 전역 상태 (다른 스크립트 블록과 공유)
+        window.isEditMode = false;
+        window.isUserAdmin = false;
+        window.siteData = {}; 
         let unsubscribeSnapshot = null;
 
         const getDocRef = () => doc(db, 'artifacts', validAppId, 'public', 'data', 'content', 'guide_page');
@@ -959,11 +961,11 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (!user) {
-                isUserAdmin = false;
+                window.isUserAdmin = false;
                 authBtnText.textContent = "관리자 로그인";
                 editControls.classList.add('hidden');
                 editControls.classList.remove('flex');
-                if (isEditMode) toggleEditMode();
+                if (window.isEditMode) toggleEditMode();
                 if (unsubscribeSnapshot) { unsubscribeSnapshot(); unsubscribeSnapshot = null; }
                 return;
             }
@@ -984,7 +986,7 @@
                     const adminSnap = await getDoc(adminDocRef);
 
                     if (adminSnap.exists()) {
-                        isUserAdmin = true;
+                        window.isUserAdmin = true;
                         authBtnText.textContent = "로그아웃";
                         editControls.classList.remove('hidden');
                         editControls.classList.add('flex');
@@ -1003,22 +1005,21 @@
                     return;
                 }
             } else {
-                isUserAdmin = false;
+                window.isUserAdmin = false;
                 authBtnText.textContent = "관리자 로그인";
                 editControls.classList.add('hidden');
                 editControls.classList.remove('flex');
-                if (isEditMode) toggleEditMode(); 
+                if (window.isEditMode) toggleEditMode(); 
             }
 
+            // 실시간 데이터 동기화
             if (!unsubscribeSnapshot && firebaseConfig.apiKey !== "YOUR_API_KEY") {
                 try {
                     unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
                         if (docSnap.exists()) {
-                            const data = docSnap.data();
-                            editableElements.forEach(el => {
-                                const key = el.getAttribute('data-edit-key');
-                                if (data[key] !== undefined) { el.textContent = data[key]; }
-                            });
+                            window.siteData = docSnap.data();
+                            // 앱 로직에 데이터 업데이트 이벤트를 발송하여 화면을 다시 그리도록 함
+                            window.dispatchEvent(new Event('siteDataUpdated'));
                         }
                     }, (error) => {
                         console.warn("Firestore 읽기 권한이 없거나 동기화 오류가 발생했습니다:", error);
@@ -1035,7 +1036,7 @@
                 return;
             }
 
-            if (isUserAdmin) {
+            if (window.isUserAdmin) {
                 try {
                     await signOut(auth);
                     await initAuth(); 
@@ -1043,6 +1044,11 @@
                 } catch (error) { showToast("로그아웃 실패", true); }
             } else {
                 const provider = new GoogleAuthProvider();
+                // 💡 [추가된 부분] 계정 선택창 강제 표시 옵션
+                provider.setCustomParameters({
+                    prompt: 'select_account'
+                });
+
                 try {
                     showToast("계정 권한을 확인 중입니다...");
                     await signInWithPopup(auth, provider);
@@ -1055,14 +1061,18 @@
         });
 
         function toggleEditMode() {
-            isEditMode = !isEditMode;
-            if (isEditMode) {
+            window.isEditMode = !window.isEditMode;
+            
+            // 동적 요소를 포함해 화면에 그려진 모든 편집 가능 요소를 찾음
+            const currentEditable = document.querySelectorAll('[data-edit-key]');
+
+            if (window.isEditMode) {
                 toggleEditBtn.textContent = "수정 모드 끄기";
                 toggleEditBtn.classList.replace('bg-stone-700', 'bg-rose-700');
                 toggleEditBtn.classList.replace('hover:bg-stone-600', 'hover:bg-rose-600');
                 saveBtn.classList.remove('hidden');
                 
-                editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+                currentEditable.forEach(el => el.setAttribute('contenteditable', 'true'));
                 showToast("수정 모드가 켜졌습니다. 텍스트를 클릭하여 수정하세요.");
             } else {
                 toggleEditBtn.textContent = "수정 모드 켜기";
@@ -1070,19 +1080,20 @@
                 toggleEditBtn.classList.replace('hover:bg-rose-600', 'hover:bg-stone-600');
                 saveBtn.classList.add('hidden');
                 
-                editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+                currentEditable.forEach(el => el.setAttribute('contenteditable', 'false'));
             }
         }
 
         toggleEditBtn.addEventListener('click', toggleEditMode);
 
         saveBtn.addEventListener('click', async () => {
-            if (!isUserAdmin) return;
+            if (!window.isUserAdmin) return;
             
             const newData = {};
-            editableElements.forEach(el => {
+            // 화면에 보이는 모든 편집된 영역의 내용을 가져옴 (innerHTML을 사용해 목록 형태 보존)
+            document.querySelectorAll('[data-edit-key]').forEach(el => {
                 const key = el.getAttribute('data-edit-key');
-                newData[key] = el.textContent.trim(); 
+                newData[key] = el.innerHTML.trim(); 
             });
 
             saveBtn.disabled = true;
@@ -1104,6 +1115,29 @@
     <!-- Application Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // Firestore 연동 이벤트 리스너: 서버에서 데이터가 오면 화면을 다시 그림
+            window.addEventListener('siteDataUpdated', () => {
+                // 1. 고정된 정적 요소들 업데이트
+                document.querySelectorAll('[data-edit-key]').forEach(el => {
+                    const key = el.getAttribute('data-edit-key');
+                    // 동적으로 그려지는 요소(map_, class_, phase_ 로 시작)는 제외
+                    if (!key.startsWith('map_') && !key.startsWith('class_') && !key.startsWith('phase_')) {
+                        if (window.siteData[key] !== undefined) {
+                            el.innerHTML = window.siteData[key];
+                        }
+                    }
+                });
+
+                // 2. 현재 열려있는 동적 탭들 다시 그리기
+                if (window.currentMapNode) activateNode(window.currentMapNode, true);
+                if (window.currentClassId) {
+                    const activeCls = classData.find(c => c.id === window.currentClassId);
+                    if(activeCls) updateClassDetails(activeCls, true);
+                }
+                if (window.currentPhase) activatePhase(window.currentPhase, true);
+            });
+
 
             // --- 1. Map Interaction Logic ---
             const mapData = {
@@ -1146,51 +1180,80 @@
             const dTags = document.getElementById('detail-tags');
             const dContainer = document.getElementById('node-detail-container');
 
-            function activateNode(target) {
-                // Reset buttons
-                mapButtons.forEach(n => {
-                    n.className = 'map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent';
-                });
-                
-                // Reset map points
-                mapCssPoints.forEach(n => n.classList.remove('active'));
+            window.currentMapNode = 'def-spawn';
 
-                // Set active buttons
-                const activeBtn = document.querySelector(`.map-node-btn[data-target="${target}"]`);
-                if (activeBtn) {
-                    if (target === 'def-spawn') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs sm:text-sm border-2 border-blue-500';
-                    else if (target === 'artifact') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-bold text-xs sm:text-sm border-2 border-rose-500';
-                    else if (target === 'gates') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-stone-200 text-stone-800 font-bold text-xs sm:text-sm border-2 border-stone-500';
-                    else if (target === 'atk-spawn') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-green-100 text-green-800 font-bold text-xs sm:text-sm border-2 border-green-500';
-                    else if (target === 'outpost-east' || target === 'outpost-west') {
-                        document.querySelector('.map-node-btn[data-target="outpost-east"]').className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-xs sm:text-sm border-2 border-stone-400';
-                    }
-                    else if (target === 'outpost-south') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs sm:text-sm border-2 border-amber-600 shadow-sm';
-                }
+            function activateNode(target, fromSync = false) {
+                window.currentMapNode = target;
 
-                // Set active map points
-                if (target === 'outpost-east') {
-                    document.querySelector(`.css-map-point[data-target="outpost-east"]`).classList.add('active');
-                    document.querySelector(`.css-map-point[data-target="outpost-west"]`).classList.add('active');
-                } else {
-                    document.querySelectorAll(`.css-map-point[data-target="${target}"]`).forEach(n => n.classList.add('active'));
-                }
-
-                // Update Content
-                const data = mapData[target];
-
-                dContainer.style.opacity = '0';
-                setTimeout(() => {
-                    dTitle.textContent = data.title;
-                    dDesc.textContent = data.desc;
-                    
-                    dTags.innerHTML = '';
-                    data.tags.forEach(tag => {
-                        const span = document.createElement('span');
-                        span.className = 'bg-stone-200 text-stone-700 px-2 py-1 rounded text-sm';
-                        span.textContent = tag;
-                        dTags.appendChild(span);
+                if (!fromSync) {
+                    // Reset buttons
+                    mapButtons.forEach(n => {
+                        n.className = 'map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent';
                     });
+                    
+                    // Reset map points
+                    mapCssPoints.forEach(n => n.classList.remove('active'));
+
+                    // Set active buttons
+                    const activeBtn = document.querySelector(`.map-node-btn[data-target="${target}"]`);
+                    if (activeBtn) {
+                        if (target === 'def-spawn') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs sm:text-sm border-2 border-blue-500';
+                        else if (target === 'artifact') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-bold text-xs sm:text-sm border-2 border-rose-500';
+                        else if (target === 'gates') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-stone-200 text-stone-800 font-bold text-xs sm:text-sm border-2 border-stone-500';
+                        else if (target === 'atk-spawn') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-green-100 text-green-800 font-bold text-xs sm:text-sm border-2 border-green-500';
+                        else if (target === 'outpost-east' || target === 'outpost-west') {
+                            document.querySelector('.map-node-btn[data-target="outpost-east"]').className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-xs sm:text-sm border-2 border-stone-400';
+                        }
+                        else if (target === 'outpost-south') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs sm:text-sm border-2 border-amber-600 shadow-sm';
+                    }
+
+                    // Set active map points
+                    if (target === 'outpost-east') {
+                        document.querySelector(`.css-map-point[data-target="outpost-east"]`).classList.add('active');
+                        // West outpost might not have a distinct button in valencia, but we activate it if it exists
+                        const westPoint = document.querySelector(`.css-map-point[data-target="outpost-west"]`);
+                        if (westPoint) westPoint.classList.add('active');
+                    } else {
+                        document.querySelectorAll(`.css-map-point[data-target="${target}"]`).forEach(n => n.classList.add('active'));
+                    }
+                }
+
+                // Update Content (Firestore Data Fetch)
+                const data = mapData[target];
+                const fsTitle = window.siteData ? window.siteData[`map_${target}_title`] : undefined;
+                const fsDesc = window.siteData ? window.siteData[`map_${target}_desc`] : undefined;
+                const fsTags = window.siteData ? window.siteData[`map_${target}_tags`] : undefined;
+
+                const renderContent = () => {
+                    dTitle.innerHTML = fsTitle !== undefined ? fsTitle : data.title;
+                    dDesc.innerHTML = fsDesc !== undefined ? fsDesc : data.desc;
+                    
+                    if (fsTags !== undefined) {
+                        dTags.innerHTML = fsTags;
+                    } else {
+                        dTags.innerHTML = '';
+                        data.tags.forEach(tag => {
+                            const span = document.createElement('span');
+                            span.className = 'bg-stone-200 text-stone-700 px-2 py-1 rounded text-sm';
+                            span.textContent = tag;
+                            dTags.appendChild(span);
+                        });
+                    }
+
+                    // Set Data Edit Keys
+                    dTitle.setAttribute('data-edit-key', `map_${target}_title`);
+                    dDesc.setAttribute('data-edit-key', `map_${target}_desc`);
+                    dTags.setAttribute('data-edit-key', `map_${target}_tags`);
+
+                    if (window.isEditMode) {
+                        dTitle.setAttribute('contenteditable', 'true');
+                        dDesc.setAttribute('contenteditable', 'true');
+                        dTags.setAttribute('contenteditable', 'true');
+                    } else {
+                        dTitle.setAttribute('contenteditable', 'false');
+                        dDesc.setAttribute('contenteditable', 'false');
+                        dTags.setAttribute('contenteditable', 'false');
+                    }
                     
                     // Theme border based on node
                     let borderColor = 'border-amber-500';
@@ -1201,7 +1264,14 @@
 
                     dContainer.className = `bg-stone-50 p-6 md:p-8 rounded-xl border-l-4 transition-all duration-300 ${borderColor}`;
                     dContainer.style.opacity = '1';
-                }, 150);
+                };
+
+                if (fromSync) {
+                    renderContent();
+                } else {
+                    dContainer.style.opacity = '0';
+                    setTimeout(renderContent, 150);
+                }
             }
 
             mapButtons.forEach(btn => btn.addEventListener('click', function() { activateNode(this.dataset.target); }));
@@ -1230,7 +1300,7 @@
                   tips: ['다리 입구나 성문 앞 좁은 길목에서 "얼음의 방진"을 사용하여 진입 및 잡기 완벽 차단', '무극과 함께 최전방 수비 라인을 구축하여 공성측의 접근 봉쇄'] },
                 { id: 'sage', name: '세이지', role: 'ranged', roleName: '공간장악/폭격', stats: [90, 70, 95, 85, 75], 
                   desc: '시공간을 제어하는 무적 이동기(균열)와 긴 사거리의 마법으로 변수를 창출합니다. 전방 가드를 단숨에 깨는 능력이 탁월해 뭉쳐있는 수성 진형의 방어선을 무너뜨리는 데 최적화되어 있습니다.',
-                  tips: ['무적 시공간 이동으로 안전한 위치 선점 후 적 밀집 구역 광역 폭격', '상대의 전방 가드 유지 타이밍을 노려 카운터 딜링'] },
+                  tips: ['무적 시공간 이동으로 안전한 위치 선점 후 적 밀집 구역 광역 폭격', '상대의 전방 가드 유지 타이밍 노려 카운터 딜링'] },
                 { id: 'archmage', name: '아크메이지', role: 'ranged', roleName: '광역 빙결/마법', stats: [95, 40, 95, 55, 80], 
                   desc: '원거리에서 눈보라와 유성 낙하 등 강력한 광역 마법을 쏟아부어 병목 구간의 방어선을 뚫어내는 전장의 주포입니다. 다수를 무력화하는 빙결 능력이 한타에서 매우 치명적입니다.',
                   tips: ['좁은 다리, 성문 입구에 광역 빙결 및 폭딜 집중', '아군 무극/타이탄의 보호 아래 최후방 안전지대에서 캐스팅'] },
@@ -1254,6 +1324,8 @@
             const cRole = document.getElementById('class-detail-role');
             const cDesc = document.getElementById('class-detail-desc');
             const cTips = document.getElementById('class-detail-tips');
+
+            window.currentClassId = null;
 
             function renderClassList(filter) {
                 classListEl.innerHTML = '';
@@ -1281,26 +1353,58 @@
                 if(classListEl.firstChild) classListEl.firstChild.click();
             }
 
-            function updateClassDetails(cls) {
-                cName.textContent = cls.name;
-                cRole.textContent = cls.roleName;
+            function updateClassDetails(cls, fromSync = false) {
+                window.currentClassId = cls.id;
+
+                // Firestore 데이터 조회
+                const fsName = window.siteData ? window.siteData[`class_${cls.id}_name`] : undefined;
+                const fsRole = window.siteData ? window.siteData[`class_${cls.id}_roleName`] : undefined;
+                const fsDesc = window.siteData ? window.siteData[`class_${cls.id}_desc`] : undefined;
+                const fsTips = window.siteData ? window.siteData[`class_${cls.id}_tips`] : undefined;
+
+                cName.innerHTML = fsName !== undefined ? fsName : cls.name;
+                cRole.innerHTML = fsRole !== undefined ? fsRole : cls.roleName;
                 cRole.className = `px-3 py-1 text-xs font-bold rounded ${cls.role === 'melee' ? 'bg-rose-100 text-rose-700' : 'bg-sky-100 text-sky-700'}`;
-                cDesc.textContent = cls.desc;
+                cDesc.innerHTML = fsDesc !== undefined ? fsDesc : cls.desc;
                 
-                cTips.innerHTML = '';
-                cls.tips.forEach(tip => {
-                    const li = document.createElement('li');
-                    li.textContent = tip;
-                    cTips.appendChild(li);
-                });
+                if (fsTips !== undefined) {
+                    cTips.innerHTML = fsTips;
+                } else {
+                    cTips.innerHTML = '';
+                    cls.tips.forEach(tip => {
+                        const li = document.createElement('li');
+                        li.textContent = tip;
+                        cTips.appendChild(li);
+                    });
+                }
+
+                // ID 부여
+                cName.setAttribute('data-edit-key', `class_${cls.id}_name`);
+                cRole.setAttribute('data-edit-key', `class_${cls.id}_roleName`);
+                cDesc.setAttribute('data-edit-key', `class_${cls.id}_desc`);
+                cTips.setAttribute('data-edit-key', `class_${cls.id}_tips`);
+
+                if (window.isEditMode) {
+                    cName.setAttribute('contenteditable', 'true');
+                    cRole.setAttribute('contenteditable', 'true');
+                    cDesc.setAttribute('contenteditable', 'true');
+                    cTips.setAttribute('contenteditable', 'true');
+                } else {
+                    cName.setAttribute('contenteditable', 'false');
+                    cRole.setAttribute('contenteditable', 'false');
+                    cDesc.setAttribute('contenteditable', 'false');
+                    cTips.setAttribute('contenteditable', 'false');
+                }
 
                 // Update Chart
-                classChart.data.datasets[0].data = cls.stats;
-                classChart.data.datasets[0].label = `${cls.name} 스탯`;
-                classChart.data.datasets[0].backgroundColor = cls.role === 'melee' ? 'rgba(225, 29, 72, 0.2)' : 'rgba(14, 165, 233, 0.2)';
-                classChart.data.datasets[0].borderColor = cls.role === 'melee' ? 'rgb(225, 29, 72)' : 'rgb(14, 165, 233)';
-                classChart.data.datasets[0].pointBackgroundColor = cls.role === 'melee' ? 'rgb(225, 29, 72)' : 'rgb(14, 165, 233)';
-                classChart.update();
+                if (!fromSync) {
+                    classChart.data.datasets[0].data = cls.stats;
+                    classChart.data.datasets[0].label = `${cls.name} 스탯`;
+                    classChart.data.datasets[0].backgroundColor = cls.role === 'melee' ? 'rgba(225, 29, 72, 0.2)' : 'rgba(14, 165, 233, 0.2)';
+                    classChart.data.datasets[0].borderColor = cls.role === 'melee' ? 'rgb(225, 29, 72)' : 'rgb(14, 165, 233)';
+                    classChart.data.datasets[0].pointBackgroundColor = cls.role === 'melee' ? 'rgb(225, 29, 72)' : 'rgb(14, 165, 233)';
+                    classChart.update();
+                }
             }
 
             // Init Radar Chart
@@ -1383,6 +1487,62 @@
             const pDefend = document.getElementById('phase-defend-list');
             const pContainer = document.getElementById('phase-content-container');
 
+            window.currentPhase = 'prep';
+
+            function activatePhase(target, fromSync = false) {
+                window.currentPhase = target;
+                const data = phaseData[target];
+
+                const fsTitle = window.siteData ? window.siteData[`phase_${target}_title`] : undefined;
+                const fsDesc = window.siteData ? window.siteData[`phase_${target}_desc`] : undefined;
+                const fsAtk = window.siteData ? window.siteData[`phase_${target}_attack`] : undefined;
+                const fsDef = window.siteData ? window.siteData[`phase_${target}_defend`] : undefined;
+
+                const renderContent = () => {
+                    pTitle.innerHTML = fsTitle !== undefined ? fsTitle : data.title;
+                    pDesc.innerHTML = fsDesc !== undefined ? fsDesc : data.desc;
+                    
+                    if (fsAtk !== undefined) {
+                        pAttack.innerHTML = fsAtk;
+                    } else {
+                        pAttack.innerHTML = '';
+                        data.attack.forEach(item => { pAttack.innerHTML += `<li>${item}</li>`; });
+                    }
+
+                    if (fsDef !== undefined) {
+                        pDefend.innerHTML = fsDef;
+                    } else {
+                        pDefend.innerHTML = '';
+                        data.defend.forEach(item => { pDefend.innerHTML += `<li>${item}</li>`; });
+                    }
+
+                    pTitle.setAttribute('data-edit-key', `phase_${target}_title`);
+                    pDesc.setAttribute('data-edit-key', `phase_${target}_desc`);
+                    pAttack.setAttribute('data-edit-key', `phase_${target}_attack`);
+                    pDefend.setAttribute('data-edit-key', `phase_${target}_defend`);
+
+                    if (window.isEditMode) {
+                        pTitle.setAttribute('contenteditable', 'true');
+                        pDesc.setAttribute('contenteditable', 'true');
+                        pAttack.setAttribute('contenteditable', 'true');
+                        pDefend.setAttribute('contenteditable', 'true');
+                    } else {
+                        pTitle.setAttribute('contenteditable', 'false');
+                        pDesc.setAttribute('contenteditable', 'false');
+                        pAttack.setAttribute('contenteditable', 'false');
+                        pDefend.setAttribute('contenteditable', 'false');
+                    }
+                    pContainer.style.opacity = '1';
+                };
+
+                if (fromSync) {
+                    renderContent(); // 애니메이션 생략
+                } else {
+                    pContainer.style.opacity = '0';
+                    setTimeout(renderContent, 150);
+                }
+            }
+
             document.querySelectorAll('.phase-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     // Reset styling
@@ -1393,27 +1553,7 @@
                     this.classList.add('active', 'text-amber-600', 'border-amber-600');
                     this.classList.remove('text-stone-500', 'border-transparent');
 
-                    const target = this.dataset.phase;
-                    const data = phaseData[target];
-
-                    pContainer.style.opacity = '0';
-                    setTimeout(() => {
-                        pTitle.textContent = data.title;
-                        pDesc.textContent = data.desc;
-                        
-                        pAttack.innerHTML = '';
-                        data.attack.forEach(item => {
-                            pAttack.innerHTML += `<li>${item}</li>`;
-                        });
-
-                        pDefend.innerHTML = '';
-                        data.defend.forEach(item => {
-                            pDefend.innerHTML += `<li>${item}</li>`;
-                        });
-
-                        pContainer.style.transition = 'opacity 0.3s';
-                        pContainer.style.opacity = '1';
-                    }, 150);
+                    activatePhase(this.dataset.phase);
                 });
             });
 
