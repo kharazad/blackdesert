@@ -1049,6 +1049,11 @@
                 } catch (error) { showToast("로그아웃 실패", true); }
             } else {
                 const provider = new GoogleAuthProvider();
+                // 💡 [추가된 부분] 계정 선택창 강제 표시 옵션
+                provider.setCustomParameters({
+                    prompt: 'select_account'
+                });
+                
                 try {
                     showToast("계정 권한을 확인 중입니다...");
                     await signInWithPopup(auth, provider);
