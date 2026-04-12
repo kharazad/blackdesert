@@ -1625,6 +1625,43 @@
                     window.summaryChart.options.scales.y.min = Math.max(0, Math.floor(allMin * 0.8 / 10000) * 10000);
                     
                     window.summaryChart.update();
+
+                    // --- 실시간 전력 비교를 통한 칼페온 전술 동적 자동 생성 ---
+                    const insightList = document.querySelector('[data-edit-key="insightList"]');
+                    const insightTitle = document.querySelector('[data-edit-key="insightTitle"]');
+                    
+                    if (insightList && document.activeElement !== insightList) {
+                        if(insightTitle && document.activeElement !== insightTitle) {
+                             insightTitle.innerHTML = `💡 실시간 전력 기반 칼페온 전술 (자동 분석)`;
+                        }
+
+                        const maxDiff = rMax - eMax;
+                        let topTierText = '';
+                        if (maxDiff >= 0) {
+                            topTierText = `<li><strong>${regenName} 최상위 투력 우위:</strong> ${Math.floor(rMax/10000)}만 구간의 강력한 최상위 유저들을 앞세워, 적 주력 부대가 성문에 진입하기 전에 허리를 끊어내는 선제 타격이 유효합니다.</li>`;
+                        } else {
+                            topTierText = `<li><strong>${enemyName} 최상위 투력 경계:</strong> 적의 돌격 대장(최고 투력)이 더 강력합니다. 타이탄의 '잡기'와 무극의 '파훼'를 연계하여 적 고투력이 아군 진영을 휘젓지 못하도록 최우선으로 전담 마크해야 합니다.</li>`;
+                        }
+
+                        const avgDiff = rAvg - eAvg;
+                        let avgTierText = '';
+                        if (avgDiff >= 0) {
+                            avgTierText = `<li><strong>${regenName} 평균 전력 우위:</strong> 길드원 전체의 평균 전투력이 탄탄합니다. 난전과 소모전 구도로 끌고 갈수록 적의 부활 타이밍이 꼬이며 우리에게 유리한 전황이 펼쳐집니다.</li>`;
+                        } else {
+                            avgTierText = `<li><strong>${enemyName} 다수결 화력 우세:</strong> 적의 평균층이 두터워 평지에서의 전면전은 불리합니다. 무조건 좁은 성문과 다리 입구 등 <strong>병목 구간</strong>을 활용하여 적의 다수 화력이 분산되도록 유도해야 합니다.</li>`;
+                        }
+
+                        let tacticText = '';
+                        if (avgDiff > 1000) {
+                             tacticText = `<li><strong>칼페온 압박형 전술:</strong> 압도적인 투력을 바탕으로 외곽 타워(신기전/대포)를 상시 점령하고, 수성 시에도 적이 외성문을 두드리기 전부터 전진 배치하여 진입을 원천 봉쇄하는 공세적 방어가 승리의 열쇠입니다.</li>`;
+                        } else if (avgDiff < -1000) {
+                             tacticText = `<li><strong>칼페온 지연/수성 전술:</strong> 전력 열세입니다. 적이 '흑정령 탈출'로 어느 외성문을 노리는지 신속히 정찰하세요. 내성문과 성물 코앞으로 끊임없이 전진하는 적의 부활 러시에 맞서 <strong>육탄 방어벽(무극/가디언)</strong>을 끝까지 유지해야 합니다.</li>`;
+                        } else {
+                             tacticText = `<li><strong>칼페온 기동 백업 전술:</strong> 양 길드의 전력이 팽팽합니다! 칼페온 특유의 <strong>V자 양갈래 진입로</strong>에서 적의 기동(주공/조공)에 속지 않고 아군을 빠르게 분산/집중시키는 <strong>오더의 기동 백업 지휘</strong>가 오늘 승패를 100% 가릅니다.</li>`;
+                        }
+
+                        insightList.innerHTML = topTierText + avgTierText + tacticText;
+                    }
                 }
             };
             
