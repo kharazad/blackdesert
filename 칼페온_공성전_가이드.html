@@ -52,24 +52,11 @@
         .css-map-point:hover {
             transform: scale(1.1);
         }
-        .css-map-point.active .map-circle, .css-map-point.active .map-node {
+        .css-map-point.active .map-circle {
             box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.6); /* amber-400 glow */
-        }
-        .css-map-point.active .map-node {
-            background-color: #1f2937;
-        }
-
-        .map-node {
-            width: 34px;
-            height: 34px;
-            background-color: #0b0f19;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 20;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+            background-color: #fef3c7 !important;
+            color: #d97706 !important;
+            border-color: #f59e0b !important;
         }
 
         .tab-btn.active {
@@ -78,18 +65,24 @@
             font-weight: 700;
         }
 
-        /* Editable Field Styles */
+        /* Editable Field Styles - 레이아웃 붕괴 방지 최적화 */
         [contenteditable="true"] {
             outline: 2px dashed #d97706;
             background-color: rgba(217, 119, 6, 0.15);
-            border-radius: 4px;
-            padding: 2px 4px;
             cursor: text;
             transition: background-color 0.2s;
+        }
+        [contenteditable="true"]:not(tbody):not(tr):not(td):not(th) {
+            border-radius: 4px;
+            padding: 2px 4px;
         }
         [contenteditable="true"]:focus {
             background-color: rgba(217, 119, 6, 0.3);
             outline: 2px solid #f59e0b;
+        }
+        tbody[contenteditable="true"] {
+            background-color: transparent;
+            outline-offset: -2px;
         }
 
         /* Toast Animation */
@@ -169,19 +162,19 @@
                                 <thead class="sticky top-0 shadow-md z-20">
                                     <tr>
                                         <th class="border-b border-r border-stone-300 px-1 py-2 text-stone-600 font-bold bg-stone-200">No</th>
-                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100">리젠</th>
+                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100" data-edit-key="cpThRegen">리젠</th>
                                         <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100">전투력 ↓</th>
                                         <th class="border-b border-r border-stone-300 px-2 py-2 text-stone-700 font-bold bg-stone-200">전투력비교</th>
-                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-purple-800 font-bold bg-purple-100">오리진</th>
+                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-purple-800 font-bold bg-purple-100" data-edit-key="cpThEnemy">오리진</th>
                                         <th class="border-b border-stone-300 px-2 py-2 text-purple-800 font-bold bg-purple-100">전투력</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-stone-800 font-medium">
+                                <tbody class="text-stone-800 font-medium" data-edit-key="cpTableBody">
                                     <tr class="border-b border-stone-200">
                                         <td class="border-r border-stone-200 py-1.5 bg-white">1</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">청춘만세</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">137,560</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +332</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +332</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">이직하세요</td>
                                         <td class="py-1.5 bg-[#faf5ff]">137,228</td>
                                     </tr>
@@ -189,7 +182,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">2</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카이그린</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,257</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +3,917</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +3,917</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">사퇴하세요</td>
                                         <td class="py-1.5 bg-[#faf5ff]">136,174</td>
                                     </tr>
@@ -197,7 +190,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">3</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">하이큐</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">132,256</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +2,392</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +2,392</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">화랑</td>
                                         <td class="py-1.5 bg-[#faf5ff]">134,648</td>
                                     </tr>
@@ -205,7 +198,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">4</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠뮤직</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">130,481</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +3,512</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +3,512</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">잔율</td>
                                         <td class="py-1.5 bg-[#faf5ff]">133,993</td>
                                     </tr>
@@ -213,7 +206,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">5</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">극의</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">127,116</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +5,511</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +5,511</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">에버가든</td>
                                         <td class="py-1.5 bg-[#faf5ff]">132,627</td>
                                     </tr>
@@ -221,7 +214,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">6</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">광용</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,813</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +4,175</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +4,175</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">KYO1011</td>
                                         <td class="py-1.5 bg-[#faf5ff]">130,988</td>
                                     </tr>
@@ -229,7 +222,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">7</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">치치코코</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,454</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +4,475</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +4,475</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">신비</td>
                                         <td class="py-1.5 bg-[#faf5ff]">130,929</td>
                                     </tr>
@@ -237,7 +230,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">8</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">경휘</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">126,224</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +4,183</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +4,183</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">해므</td>
                                         <td class="py-1.5 bg-[#faf5ff]">130,407</td>
                                     </tr>
@@ -245,7 +238,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">9</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">야마토</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,900</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +4,794</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +4,794</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">알파독</td>
                                         <td class="py-1.5 bg-[#faf5ff]">128,694</td>
                                     </tr>
@@ -253,7 +246,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">10</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">탄Is</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">123,502</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +3,839</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +3,839</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">RYOK</td>
                                         <td class="py-1.5 bg-[#faf5ff]">127,341</td>
                                     </tr>
@@ -261,7 +254,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">11</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">콕님</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">122,418</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +3,560</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +3,560</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">모츠</td>
                                         <td class="py-1.5 bg-[#faf5ff]">125,978</td>
                                     </tr>
@@ -269,7 +262,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">12</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도천류</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,875</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +3,467</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +3,467</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">탄윈</td>
                                         <td class="py-1.5 bg-[#faf5ff]">125,342</td>
                                     </tr>
@@ -277,7 +270,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">13</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라이텐</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">121,467</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +2,587</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +2,587</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">티투케이</td>
                                         <td class="py-1.5 bg-[#faf5ff]">124,054</td>
                                     </tr>
@@ -285,7 +278,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">14</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">슉님</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,594</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +4,113</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +4,113</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">수달잉</td>
                                         <td class="py-1.5 bg-[#faf5ff]">123,707</td>
                                     </tr>
@@ -293,7 +286,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">15</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">XIGNCODE</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">119,070</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +1,840</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +1,840</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅집밥</td>
                                         <td class="py-1.5 bg-[#faf5ff]">120,910</td>
                                     </tr>
@@ -301,7 +294,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">16</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">찬아</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,720</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +952</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +952</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">TcT</td>
                                         <td class="py-1.5 bg-[#faf5ff]">118,672</td>
                                     </tr>
@@ -309,7 +302,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">17</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">덩치</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,419</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +892</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +892</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">o리치o</td>
                                         <td class="py-1.5 bg-[#faf5ff]">116,527</td>
                                     </tr>
@@ -317,7 +310,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">18</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Rundeseki</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">117,250</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,515</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +1,515</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅개밥</td>
                                         <td class="py-1.5 bg-[#faf5ff]">115,735</td>
                                     </tr>
@@ -325,7 +318,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">19</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">헤라냥</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">116,485</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,062</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +2,062</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">신사숙녀여러분</td>
                                         <td class="py-1.5 bg-[#faf5ff]">114,423</td>
                                     </tr>
@@ -333,7 +326,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">20</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">매타몽</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">115,156</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +797</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +797</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅콩밥</td>
                                         <td class="py-1.5 bg-[#faf5ff]">114,359</td>
                                     </tr>
@@ -341,7 +334,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">21</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">뮤츠</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">114,602</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +617</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +617</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">콕카인</td>
                                         <td class="py-1.5 bg-[#faf5ff]">113,985</td>
                                     </tr>
@@ -349,15 +342,15 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">22</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">꼬리v</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,801</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +365</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-xs">낄낄낄낄낄낄낄낄낄</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +365</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">낄낄낄낄낄낄낄낄낄</td>
                                         <td class="py-1.5 bg-[#faf5ff]">113,436</td>
                                     </tr>
                                     <tr class="border-b border-stone-200">
                                         <td class="border-r border-stone-200 py-1.5 bg-white">23</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">나님</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,786</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +881</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +881</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">유키치</td>
                                         <td class="py-1.5 bg-[#faf5ff]">112,905</td>
                                     </tr>
@@ -365,7 +358,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">24</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">KHARAZAD</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,587</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +808</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +808</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">Hide</td>
                                         <td class="py-1.5 bg-[#faf5ff]">112,779</td>
                                     </tr>
@@ -373,15 +366,15 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">25</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">허키</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,552</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +989</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +989</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">허치</td>
                                         <td class="py-1.5 bg-[#faf5ff]">112,563</td>
                                     </tr>
                                     <tr class="border-b border-stone-200">
                                         <td class="border-r border-stone-200 py-1.5 bg-white">26</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-white">리젠필드</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-white">113,458</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +923</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠필드</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,458</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +923</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">하이버터</td>
                                         <td class="py-1.5 bg-[#faf5ff]">112,535</td>
                                     </tr>
@@ -389,7 +382,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">27</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">은귤</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">113,147</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +809</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +809</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">다정한마로씨</td>
                                         <td class="py-1.5 bg-[#faf5ff]">112,338</td>
                                     </tr>
@@ -397,7 +390,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">28</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">발렌타인</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,923</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +11</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +11</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">아기공룡둘리</td>
                                         <td class="py-1.5 bg-[#faf5ff]">111,934</td>
                                     </tr>
@@ -405,7 +398,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">29</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">금니</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,351</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +56</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +56</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">탄포</td>
                                         <td class="py-1.5 bg-[#faf5ff]">111,407</td>
                                     </tr>
@@ -413,7 +406,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">30</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">정사시미</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,305</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +26</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +26</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">혼술왕드링킹</td>
                                         <td class="py-1.5 bg-[#faf5ff]">111,279</td>
                                     </tr>
@@ -421,7 +414,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">31</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">챠홍</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">111,219</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +677</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +677</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">앙군</td>
                                         <td class="py-1.5 bg-[#faf5ff]">110,542</td>
                                     </tr>
@@ -429,7 +422,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">32</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">GODDOK</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,713</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +209</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +209</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">장원영카리나레이라</td>
                                         <td class="py-1.5 bg-[#faf5ff]">109,922</td>
                                     </tr>
@@ -437,7 +430,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">33</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">인시</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,672</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +211</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +211</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">제이제이혁명</td>
                                         <td class="py-1.5 bg-[#faf5ff]">109,883</td>
                                     </tr>
@@ -445,7 +438,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">34</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">Czar</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,085</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +670</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +670</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">흑귀</td>
                                         <td class="py-1.5 bg-[#faf5ff]">109,755</td>
                                     </tr>
@@ -453,7 +446,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">35</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">구찬성</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">109,046</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +205</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +205</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">짱아</td>
                                         <td class="py-1.5 bg-[#faf5ff]">109,251</td>
                                     </tr>
@@ -461,7 +454,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">36</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">더딘냇물</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,529</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +102</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +102</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">호날두1</td>
                                         <td class="py-1.5 bg-[#faf5ff]">108,631</td>
                                     </tr>
@@ -469,7 +462,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">37</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">츄르줄게야옹해바</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,403</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +314</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +314</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">쵸코칩쿠키</td>
                                         <td class="py-1.5 bg-[#faf5ff]">108,089</td>
                                     </tr>
@@ -477,7 +470,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">38</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">II름II</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,160</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +228</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +228</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">태극K</td>
                                         <td class="py-1.5 bg-[#faf5ff]">107,932</td>
                                     </tr>
@@ -485,7 +478,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">39</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">리젠순냥</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">108,115</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +391</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +391</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">무너</td>
                                         <td class="py-1.5 bg-[#faf5ff]">107,724</td>
                                     </tr>
@@ -493,7 +486,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">40</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">녕결</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,379</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,249</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +1,249</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅쌀밥</td>
                                         <td class="py-1.5 bg-[#faf5ff]">106,130</td>
                                     </tr>
@@ -501,7 +494,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">41</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">라임처럼</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">107,151</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,132</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +2,132</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">어디YA</td>
                                         <td class="py-1.5 bg-[#faf5ff]">105,019</td>
                                     </tr>
@@ -509,7 +502,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">42</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">카란다</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,832</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,084</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +1,084</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅다리핫바지</td>
                                         <td class="py-1.5 bg-[#faf5ff]">104,748</td>
                                     </tr>
@@ -517,7 +510,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">43</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">얘들아까꿍</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,329</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +664</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +664</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">마샤</td>
                                         <td class="py-1.5 bg-[#faf5ff]">104,665</td>
                                     </tr>
@@ -525,7 +518,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">44</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">도구로</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,278</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,961</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +1,961</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">닥터</td>
                                         <td class="py-1.5 bg-[#faf5ff]">103,317</td>
                                     </tr>
@@ -533,7 +526,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">45</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">강하</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">105,020</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +2,053</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +2,053</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">깅굴밥</td>
                                         <td class="py-1.5 bg-[#faf5ff]">102,967</td>
                                     </tr>
@@ -541,7 +534,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">46</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">요네</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">103,704</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700">리젠 +1,420</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold">리젠 +1,420</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">고요한</td>
                                         <td class="py-1.5 bg-[#faf5ff]">102,284</td>
                                     </tr>
@@ -549,7 +542,7 @@
                                         <td class="border-r border-stone-200 py-1.5 bg-white">47</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">써브캐릭터</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">99,135</td>
-                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600">오리진 +2,039</td>
+                                        <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold">오리진 +2,039</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#faf5ff]">l티리l</td>
                                         <td class="py-1.5 bg-[#faf5ff]">101,174</td>
                                     </tr>
@@ -599,7 +592,7 @@
                         <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;"></div>
 
                         <!-- SVG Map Elements (Paths & Pointers) -->
-                        <svg class="absolute inset-0 w-full h-full drop-shadow-md">
+                        <svg class="absolute inset-0 w-full h-full drop-shadow-md pointer-events-none">
                             <!-- Label Pointers -->
                             <line x1="42%" y1="21%" x2="48%" y2="10%" stroke="#78716c" stroke-width="1.5" />
                             <line x1="50%" y1="18%" x2="50%" y2="10%" stroke="#78716c" stroke-width="1.5" />
@@ -633,56 +626,57 @@
                         </svg>
 
                         <!-- Text Labels -->
-                        <div class="absolute top-[6%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0">수성측 거점&성물</div>
-                        <div class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0">내성문</div>
-                        <div class="absolute top-[68%] left-[35%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0">외성문</div>
-                        <div class="absolute top-[68%] left-[65%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0">외성문</div>
-                        <div class="absolute top-[90%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0">공성측 거점</div>
+                        <div class="absolute top-[6%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0 pointer-events-none">수성측 거점&성물</div>
+                        <div class="absolute top-[48%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0 pointer-events-none">내성문</div>
+                        <div class="absolute top-[68%] left-[35%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0 pointer-events-none">외성문</div>
+                        <div class="absolute top-[68%] left-[65%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0 pointer-events-none">외성문</div>
+                        <div class="absolute top-[90%] left-[50%] -translate-x-1/2 -translate-y-1/2 text-[14px] font-bold text-stone-300 drop-shadow-md tracking-widest whitespace-nowrap z-0 pointer-events-none">공성측 거점</div>
 
-                        <!-- Nodes (9 Points) -->
+                        <!-- Nodes (9 Points) - 깔끔한 숫자형 디자인 적용 -->
                         <div class="css-map-point absolute top-[75%] left-[14%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="atk-spawn">
-                            <div class="map-node ring-2 ring-[#22c55e] ring-offset-2 ring-offset-[#1a1d24]">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-8 h-8 bg-stone-800 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-[#22c55e] shadow-md transition-all relative">1</div>
                         </div>
                         <div class="css-map-point absolute top-[55%] left-[25%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-400 shadow-md transition-all relative">2</div>
                         </div>
                         <div class="css-map-point absolute top-[35%] left-[34%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-400 shadow-md transition-all relative">3</div>
                         </div>
                         <div class="css-map-point absolute top-[21%] left-[42%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="def-spawn">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-8 h-8 bg-stone-800 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-[#3b82f6] shadow-md transition-all relative">4</div>
                         </div>
                         <div class="css-map-point absolute top-[18%] left-[50%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="artifact">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
+                            <div class="map-circle w-8 h-8 bg-rose-600 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-rose-300 shadow-lg relative transition-all">
+                                <div class="absolute -top-4 text-rose-200 text-xl leading-none drop-shadow-md">⚙️</div>
                             </div>
                         </div>
                         <div class="css-map-point absolute top-[21%] left-[58%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="def-spawn">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-8 h-8 bg-stone-800 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-[#3b82f6] shadow-md transition-all relative">4</div>
                         </div>
                         <div class="css-map-point absolute top-[35%] left-[66%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-400 shadow-md transition-all relative">3</div>
                         </div>
                         <div class="css-map-point absolute top-[55%] left-[75%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="gates">
-                            <div class="map-node">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
-                            </div>
+                            <div class="map-circle w-7 h-7 bg-stone-700 text-white rounded-full flex items-center justify-center font-bold text-sm border-2 border-stone-400 shadow-md transition-all relative">2</div>
                         </div>
                         <div class="css-map-point absolute top-[75%] left-[86%] -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10" data-target="atk-spawn">
-                            <div class="map-node ring-2 ring-[#ef4444] ring-offset-2 ring-offset-[#1a1d24]">
-                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px] text-white"><path d="M12 2L8 5v5c0 4 4 8 4 8s4-4 4-8V5l-4-3z"/><path d="M7 6c-2 1-4 3-4 6 0 1 1 2 2 2 1-3 2-4 2-4V6z"/><path d="M17 6c2 1 4 3 4 6 0 1-1 2-2 2-1-3-2-4-2-4V6z"/></svg>
+                            <div class="map-circle w-8 h-8 bg-stone-800 text-white rounded-full flex items-center justify-center font-bold text-lg border-[3px] border-[#ef4444] shadow-md transition-all relative">1</div>
+                        </div>
+                        
+                        <!-- 외곽 거점 (Extra Features) -->
+                        <div class="css-map-point flex items-center justify-center absolute top-[50%] left-3 cursor-pointer z-10" data-target="outpost-east">
+                            <div class="map-circle w-auto px-1.5 h-6 bg-stone-800 text-white rounded-sm flex items-center justify-center font-bold text-[10px] border border-stone-500 relative shadow-md transition-all">좌측 외곽
+                                <span class="absolute top-full mt-1 text-[9px] font-medium text-stone-300 whitespace-nowrap">대포/신기전</span>
+                            </div>
+                        </div>
+                        <div class="css-map-point flex items-center justify-center absolute top-[50%] right-3 cursor-pointer z-10" data-target="outpost-east">
+                            <div class="map-circle w-auto px-1.5 h-6 bg-stone-800 text-white rounded-sm flex items-center justify-center font-bold text-[10px] border border-stone-500 relative shadow-md transition-all">우측 외곽
+                                <span class="absolute top-full mt-1 text-[9px] font-medium text-stone-300 whitespace-nowrap">대포/신기전</span>
+                            </div>
+                        </div>
+                        <div class="css-map-point flex items-center justify-center absolute bottom-4 left-1/2 -translate-x-1/2 cursor-pointer z-10" data-target="outpost-south">
+                            <div class="map-circle w-auto px-2 h-6 bg-amber-700 text-amber-50 rounded-sm flex items-center justify-center font-bold text-[11px] border border-amber-500 relative shadow-md transition-all">남쪽 외곽
+                                <span class="absolute bottom-full mb-1 text-[10px] font-bold text-amber-300 whitespace-nowrap">전장의 오우거</span>
                             </div>
                         </div>
                     </div>
@@ -692,7 +686,7 @@
                         <button class="map-node-btn active px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs sm:text-sm border-2 border-blue-500" data-target="def-spawn">수성 거점</button>
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="artifact">성물</button>
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="gates">외/내성문(좌우)</button>
-                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="atk-spawn">공성 거점</button>
+                        <button class="map-node-btn px-3 py-1.5 rounded-lg bg-green-100 text-green-800 font-bold text-xs sm:text-sm border-2 border-transparent" data-target="atk-spawn">공성 거점</button>
                         <div class="w-full h-0"></div> <!-- Line break for outposts -->
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-stone-700 text-white font-bold text-xs sm:text-sm border-2 border-transparent" data-target="outpost-east">외곽 타워(대포/신기전)</button>
                         <button class="map-node-btn px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs sm:text-sm border-2 border-amber-500 shadow-sm" data-target="outpost-south">전장의 오우거</button>
@@ -841,7 +835,7 @@
                             
                             <div>
                                 <label class="block text-sm font-bold text-stone-700 mb-2">현재 상황 입력</label>
-                                <textarea id="ai-prompt-input" rows="4" class="w-full p-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none text-sm" placeholder="예: 적의 코끼리와 주력이 좌측 외성문으로 몰려오고 있습니다. 우리는 우측 방어가 허술한 상태입니다. 어떻게 해야 할까요?"></textarea>
+                                <textarea id="ai-prompt-input" rows="4" class="w-full p-3 border border-stone-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none resize-none text-sm" placeholder="예: 적 주력이 좌측 외성문을 뚫고 들어오고 있습니다. 우측 수비조를 어떻게 움직여야 할까요?"></textarea>
                             </div>
 
                             <button id="ai-generate-btn" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-lg transition-colors flex justify-center items-center gap-2">
@@ -927,7 +921,7 @@
         const saveBtn = document.getElementById('saveBtn');
         const toastContainer = document.getElementById('toastContainer');
 
-        // 전역 상태 (다른 스크립트 블록과 공유)
+        // 전역 상태
         window.isEditMode = false;
         window.isUserAdmin = false;
         window.siteData = {}; 
@@ -1026,7 +1020,6 @@
                             window.dispatchEvent(new Event('siteDataUpdated'));
                         }
                     }, (error) => {
-                        // 권한 없음 오류는 단순히 무시 (일반 사용자의 읽기 접근이 막힌 경우)
                         console.warn("Firestore 권한 오류 무시:", error);
                     });
                 } catch (syncError) {
@@ -1049,10 +1042,7 @@
                 } catch (error) { showToast("로그아웃 실패", true); }
             } else {
                 const provider = new GoogleAuthProvider();
-                // 💡 [추가된 부분] 계정 선택창 강제 표시 옵션
-                provider.setCustomParameters({
-                    prompt: 'select_account'
-                });
+                provider.setCustomParameters({ prompt: 'select_account' });
                 
                 try {
                     showToast("계정 권한을 확인 중입니다...");
@@ -1068,7 +1058,6 @@
         function toggleEditMode() {
             window.isEditMode = !window.isEditMode;
             
-            // 동적 요소를 포함해 화면에 그려진 모든 편집 가능 요소를 찾음
             const currentEditable = document.querySelectorAll('[data-edit-key]');
             
             if (window.isEditMode) {
@@ -1095,7 +1084,6 @@
             if (!window.isUserAdmin) return;
             
             const newData = {};
-            // 화면에 보이는 모든 편집된 영역의 내용을 가져옴 (innerHTML을 사용해 목록 형태 보존)
             document.querySelectorAll('[data-edit-key]').forEach(el => {
                 const key = el.getAttribute('data-edit-key');
                 newData[key] = el.innerHTML.trim(); 
@@ -1121,12 +1109,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Firestore 연동 이벤트 리스너: 서버에서 데이터가 오면 화면을 다시 그림
             window.addEventListener('siteDataUpdated', () => {
-                // 1. 고정된 정적 요소들 업데이트
                 document.querySelectorAll('[data-edit-key]').forEach(el => {
                     const key = el.getAttribute('data-edit-key');
-                    // 동적으로 그려지는 요소(map_, class_, phase_ 로 시작)는 제외
                     if (!key.startsWith('map_') && !key.startsWith('class_') && !key.startsWith('phase_')) {
                         if (window.siteData[key] !== undefined) {
                             el.innerHTML = window.siteData[key];
@@ -1134,7 +1119,10 @@
                     }
                 });
 
-                // 2. 현재 열려있는 동적 탭들 다시 그리기
+                if (typeof window.updateChartFromTable === 'function') {
+                    window.updateChartFromTable();
+                }
+
                 if (window.currentMapNode) activateNode(window.currentMapNode, true);
                 if (window.currentClassId) {
                     const activeCls = classData.find(c => c.id === window.currentClassId);
@@ -1189,7 +1177,6 @@
             function activateNode(target, fromSync = false) {
                 window.currentMapNode = target;
                 
-                // 버튼/마커 UI 처리
                 if (!fromSync) {
                     mapButtons.forEach(n => n.className = 'map-node-btn px-3 py-1.5 rounded-lg bg-stone-200 text-stone-700 font-bold text-xs sm:text-sm border-2 border-transparent');
                     mapCssPoints.forEach(n => n.classList.remove('active'));
@@ -1206,17 +1193,10 @@
                         else if (target === 'outpost-south') activeBtn.className = 'map-node-btn active px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs sm:text-sm border-2 border-amber-600 shadow-sm';
                     }
 
-                    if (target === 'outpost-east') {
-                        const eastPoint = document.querySelector(`.css-map-point[data-target="outpost-east"]`);
-                        if (eastPoint) eastPoint.classList.add('active');
-                        const westPoint = document.querySelector(`.css-map-point[data-target="outpost-west"]`);
-                        if (westPoint) westPoint.classList.add('active');
-                    } else {
-                        document.querySelectorAll(`.css-map-point[data-target="${target}"]`).forEach(n => n.classList.add('active'));
-                    }
+                    // 지도 위 마커 연동
+                    document.querySelectorAll(`.css-map-point[data-target="${target}"]`).forEach(n => n.classList.add('active'));
                 }
 
-                // 데이터 처리 (Firestore 덮어쓰기)
                 const data = mapData[target];
                 const fsTitle = window.siteData ? window.siteData[`map_${target}_title`] : undefined;
                 const fsDesc = window.siteData ? window.siteData[`map_${target}_desc`] : undefined;
@@ -1263,7 +1243,7 @@
                 };
 
                 if (fromSync) {
-                    renderContent(); // 애니메이션 생략
+                    renderContent(); 
                 } else {
                     dContainer.style.opacity = '0';
                     setTimeout(renderContent, 150);
@@ -1347,7 +1327,6 @@
             function updateClassDetails(cls, fromSync = false) {
                 window.currentClassId = cls.id;
                 
-                // Firestore 데이터 조회
                 const fsName = window.siteData ? window.siteData[`class_${cls.id}_name`] : undefined;
                 const fsRole = window.siteData ? window.siteData[`class_${cls.id}_roleName`] : undefined;
                 const fsDesc = window.siteData ? window.siteData[`class_${cls.id}_desc`] : undefined;
@@ -1369,7 +1348,6 @@
                     });
                 }
 
-                // ID 부여
                 cName.setAttribute('data-edit-key', `class_${cls.id}_name`);
                 cRole.setAttribute('data-edit-key', `class_${cls.id}_roleName`);
                 cDesc.setAttribute('data-edit-key', `class_${cls.id}_desc`);
@@ -1449,7 +1427,7 @@
             const phaseData = {
                 'prep': {
                     title: '초반: 흑정령 탈출 급습 및 외곽 장악',
-                    desc: '칼페온 공성전 시작 직후, 기동성을 살린 외성문 타격과 남쪽의 "전장의 오우거" 버프 획득이 최우선입니다. 외곽 타워를 장악하여 본성 진입 전 우위를 점해야 합니다.',
+                    desc: '칼페 공성전 시작 직후, 기동성을 살린 외성문 타격과 남쪽의 "전장의 오우거" 버프 획득이 최우선입니다. 외곽 타워를 장악하여 본성 진입 전 우위를 점해야 합니다.',
                     attack: ['주력부대 (핵심): 공성측 거점에서 외성문 방향으로 "흑정령의 탈출"을 사용하여 단숨에 이동, 외성문을 빠르게 파괴', '대장/부대장: 공성 병기 "오우거" 즉시 소환 및 병력 이동 방향 설정', '외곽조: 남쪽 "전장의 오우거" 버프 획득 및 양쪽 타워 점령하여 본성에 포격 지원'],
                     defend: ['방어조: 좌/우 외성문으로 병력 분산 배치하여 적의 주공 루트(흑정령 탈출 위치) 신속히 정찰', '외곽조: 적 외곽조를 끊어내어 타워 지원 사격 방해', '타이탄: 적 오더나 정찰조 진입 시 즉시 컷']
                 },
@@ -1522,7 +1500,7 @@
                 };
 
                 if (fromSync) {
-                    renderContent(); // 애니메이션 생략
+                    renderContent(); 
                 } else {
                     pContainer.style.opacity = '0';
                     setTimeout(renderContent, 150);
@@ -1567,7 +1545,7 @@
             const colorOrigin = 'rgba(168, 85, 247, 0.85)'; // 연한 보라색 (purple-500)
 
             const ctxSummary = document.getElementById('cpSummaryChart').getContext('2d');
-            new Chart(ctxSummary, {
+            window.summaryChart = new Chart(ctxSummary, {
                 type: 'bar',
                 data: {
                     labels: ['최고 전투력', '평균 전투력', '최저 전투력'],
@@ -1581,6 +1559,83 @@
                     scales: { y: { min: 70000, ticks: { callback: function(value) { return value.toLocaleString(); } } } }
                 }
             });
+
+            window.updateChartFromTable = function() {
+                const rows = document.querySelectorAll('tbody[data-edit-key="cpTableBody"] tr');
+                if (rows.length === 0) return;
+
+                let regenCPs = [];
+                let enemyCPs = [];
+                
+                const regenName = document.querySelector('[data-edit-key="cpThRegen"]')?.innerText.trim() || '리젠';
+                const enemyName = document.querySelector('[data-edit-key="cpThEnemy"]')?.innerText.trim() || '적대 길드';
+
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if(cells.length >= 6) {
+                        const rCPStr = cells[2].innerText.replace(/,/g, '').trim();
+                        const eCPStr = cells[5].innerText.replace(/,/g, '').trim();
+                        
+                        const rCP = parseInt(rCPStr);
+                        const eCP = parseInt(eCPStr);
+                        
+                        if(!isNaN(rCP)) regenCPs.push(rCP);
+                        if(!isNaN(eCP)) enemyCPs.push(eCP);
+
+                        // 중앙 전투력 비교 동적 계산
+                        if (!isNaN(rCP) && !isNaN(eCP)) {
+                            const diff = rCP - eCP;
+                            const diffText = diff > 0 ? `${regenName} +${diff.toLocaleString()}` : 
+                                             diff < 0 ? `${enemyName} +${Math.abs(diff).toLocaleString()}` : '동일';
+                            
+                            // 커서 튐 방지를 위해 텍스트가 바뀔 때만 삽입
+                            if (cells[3].innerText.trim() !== diffText.trim()) {
+                                cells[3].innerText = diffText;
+                                if (diff > 0) {
+                                    cells[3].className = 'border-r border-stone-200 py-1.5 bg-[#fff3ec] text-orange-700 font-bold';
+                                } else if (diff < 0) {
+                                    cells[3].className = 'border-r border-stone-200 py-1.5 bg-[#faf5ff] text-purple-600 font-bold';
+                                } else {
+                                    cells[3].className = 'border-r border-stone-200 py-1.5 bg-stone-100 text-stone-500 font-bold';
+                                }
+                            }
+                        } else if (cells[3].innerText.trim() !== '-') {
+                            cells[3].innerText = '-';
+                            cells[3].className = 'border-r border-stone-200 py-1.5 bg-stone-100 text-stone-500';
+                        }
+                    }
+                });
+
+                if (regenCPs.length > 0 && enemyCPs.length > 0 && window.summaryChart) {
+                    const rMax = Math.max(...regenCPs);
+                    const rMin = Math.min(...regenCPs);
+                    const rAvg = Math.round(regenCPs.reduce((a,b) => a+b, 0) / regenCPs.length);
+
+                    const eMax = Math.max(...enemyCPs);
+                    const eMin = Math.min(...enemyCPs);
+                    const eAvg = Math.round(enemyCPs.reduce((a,b) => a+b, 0) / enemyCPs.length);
+
+                    window.summaryChart.data.datasets[0].label = regenName;
+                    window.summaryChart.data.datasets[0].data = [rMax, rAvg, rMin];
+                    
+                    window.summaryChart.data.datasets[1].label = enemyName;
+                    window.summaryChart.data.datasets[1].data = [eMax, eAvg, eMin];
+                    
+                    const allMin = Math.min(rMin, eMin);
+                    window.summaryChart.options.scales.y.min = Math.max(0, Math.floor(allMin * 0.8 / 10000) * 10000);
+                    
+                    window.summaryChart.update();
+                }
+            };
+            
+            window.updateChartFromTable();
+
+            const cpTableBody = document.querySelector('tbody[data-edit-key="cpTableBody"]');
+            if (cpTableBody) cpTableBody.addEventListener('input', window.updateChartFromTable);
+            const cpThRegen = document.querySelector('[data-edit-key="cpThRegen"]');
+            if (cpThRegen) cpThRegen.addEventListener('input', window.updateChartFromTable);
+            const cpThEnemy = document.querySelector('[data-edit-key="cpThEnemy"]');
+            if (cpThEnemy) cpThEnemy.addEventListener('input', window.updateChartFromTable);
 
             // --- 5. Gemini API Integration ---
             const apiKey = ""; 
