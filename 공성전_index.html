@@ -199,39 +199,6 @@
         </button>
     </div>
 
-    <!-- Firebase Setup Guide Modal -->
-    <div id="firebaseSetupModal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#1a1d24] border border-stone-700 rounded-2xl p-6 md:p-8 max-w-2xl w-full shadow-2xl relative overflow-y-auto max-h-[90vh]">
-            <button id="closeFirebaseModal" class="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <h3 class="text-2xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                데이터베이스(Firebase) 설정이 필요합니다
-            </h3>
-            <p class="text-stone-300 mb-6 text-sm leading-relaxed">
-                텍스트를 웹에서 직접 수정하고 저장하는 기능을 사용하려면, 데이터를 저장할 수 있는 <strong>Google Firebase 연동</strong>이 필수입니다. 현재 소스코드 내부의 설정값이 비어있어 로그인이 차단되었습니다. 아래 3단계를 따라 설정해주세요.
-            </p>
-            <div class="space-y-4">
-                <div class="bg-stone-800 rounded-lg p-4 border border-stone-700">
-                    <h4 class="font-bold text-white mb-2 text-amber-400">1단계: Firebase 프로젝트 생성하기</h4>
-                    <p class="text-stone-400 text-sm leading-relaxed">1. <a href="https://console.firebase.google.com/" target="_blank" class="text-blue-400 hover:underline">Firebase Console (클릭)</a>에 접속하여 <strong>[프로젝트 만들기]</strong>를 진행합니다.<br>2. 프로젝트가 생성되면 화면 중앙의 <strong>웹(</>) 아이콘</strong>을 클릭하여 앱을 등록하고, 화면에 나타나는 <code>firebaseConfig</code> 코드를 복사합니다.</p>
-                </div>
-                <div class="bg-stone-800 rounded-lg p-4 border border-stone-700">
-                    <h4 class="font-bold text-white mb-2 text-amber-400">2단계: 소스코드에 붙여넣기</h4>
-                    <p class="text-stone-400 text-sm leading-relaxed"><code>index.html</code> (그리고 공성전 가이드 파일) 소스코드를 메모장 등으로 엽니다. 맨 아래쪽 스크립트 영역에 있는 <code>localFirebaseConfig</code> 부분을 방금 복사한 <strong>본인의 구성값(apiKey, projectId 등)으로 교체</strong>하여 깃허브에 다시 업로드합니다.</p>
-                </div>
-                <div class="bg-stone-800 rounded-lg p-4 border border-stone-700">
-                    <h4 class="font-bold text-white mb-2 text-amber-400">3단계: 로그인/데이터베이스 사용 설정</h4>
-                    <p class="text-stone-400 text-sm leading-relaxed">1. Firebase 좌측 메뉴에서 <strong>Authentication</strong>을 누르고 '시작하기'를 누른 뒤, <strong>Google 로그인</strong>과 <strong>익명 로그인</strong> 제공업체를 추가(사용 설정)합니다.<br>2. 좌측 메뉴에서 <strong>Firestore Database</strong>를 누르고 '데이터베이스 만들기'를 선택한 뒤 <strong>[테스트 모드]</strong>로 데이터베이스를 생성합니다.</p>
-                </div>
-            </div>
-            <div class="mt-8 text-right">
-                <button id="closeFirebaseModalBtn" class="px-6 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-lg transition-colors">가이드 확인 완료</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
@@ -239,7 +206,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // =========================================================================
         // 적용된 Firebase 정보입니다.
@@ -255,7 +222,9 @@
         };
 
         let firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : localFirebaseConfig;
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'regen-guide-index';
+        
+        // 💡 방어코드: 환경변수가 꼬여 appId가 null 이 되는 현상 완벽 차단
+        const validAppId = (typeof __app_id !== 'undefined' && __app_id) ? String(__app_id) : 'regen-guide-index';
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -269,22 +238,13 @@
         const saveBtn = document.getElementById('saveBtn');
         const editableElements = document.querySelectorAll('[data-edit-key]');
         const toastContainer = document.getElementById('toastContainer');
-        const firebaseModal = document.getElementById('firebaseSetupModal');
-        const closeModals = [document.getElementById('closeFirebaseModal'), document.getElementById('closeFirebaseModalBtn')];
 
         let isEditMode = false;
         let isUserAdmin = false;
         let unsubscribeSnapshot = null;
 
-        // Firebase Modal Close Handlers
-        closeModals.forEach(btn => {
-            btn.addEventListener('click', () => {
-                firebaseModal.classList.add('hidden');
-            });
-        });
-
         // Firestore 문서 참조 헬퍼 함수
-        const getDocRef = () => doc(db, 'artifacts', appId, 'public', 'data', 'content', 'index_page');
+        const getDocRef = () => doc(db, 'artifacts', validAppId, 'public', 'data', 'content', 'index_page');
 
         // Custom Toast Notification
         function showToast(message, isError = false) {
@@ -299,9 +259,6 @@
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
-
-        // Check if running on file:// protocol
-        const isLocalFile = window.location.protocol === 'file:';
 
         // 2. Initial Auth Setup
         const initAuth = async () => {
@@ -318,7 +275,7 @@
         initAuth();
 
         // 3. Auth State Listener
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (!user) {
                 isUserAdmin = false;
                 authBtnText.textContent = "관리자 로그인";
@@ -333,14 +290,47 @@
                 return;
             }
 
-            // 구글 계정으로 로그인 된 경우 관리자로 처리
-            if (!user.isAnonymous) {
-                isUserAdmin = true;
-                authBtnText.textContent = "로그아웃";
-                editControls.classList.remove('hidden');
-                editControls.classList.add('flex');
+            // 💡 무한 루프 방지: Google 팝업으로 직접 로그인한 경우에만 관리자 여부 확인
+            const isGoogleLogin = user.providerData && user.providerData.some(p => p.providerId === 'google.com');
+
+            if (isGoogleLogin) {
+                const emailStr = user.email ? String(user.email).trim() : "";
+                
+                if (!emailStr) {
+                    console.warn("이메일 정보가 없는 계정입니다.");
+                    await signOut(auth);
+                    await initAuth(); 
+                    showToast("이메일 정보가 없어 접근이 거부되었습니다.", true);
+                    return;
+                }
+
+                try {
+                    // 사용자의 이메일이 allowed_users 컬렉션에 등록되어 있는지 확인
+                    const adminDocRef = doc(db, 'allowed_users', emailStr);
+                    const adminSnap = await getDoc(adminDocRef);
+
+                    if (adminSnap.exists()) {
+                        isUserAdmin = true;
+                        authBtnText.textContent = "로그아웃";
+                        editControls.classList.remove('hidden');
+                        editControls.classList.add('flex');
+                        showToast("관리자 계정으로 인증되었습니다.");
+                    } else {
+                        console.warn("승인되지 않은 이메일 접근:", emailStr);
+                        await signOut(auth);
+                        await initAuth(); // 다시 일반 사용자 상태로 복구
+                        showToast("승인된 관리자 계정이 아닙니다.", true);
+                        return; 
+                    }
+                } catch (error) {
+                    console.error("관리자 권한 확인 오류:", error);
+                    await signOut(auth);
+                    await initAuth();
+                    showToast("권한 확인 중 오류가 발생했습니다.", true);
+                    return;
+                }
             } else {
-                // 익명 로그인 상태
+                // 익명 또는 커스텀 토큰 로그인 (일반 사용자)
                 isUserAdmin = false;
                 authBtnText.textContent = "관리자 로그인";
                 editControls.classList.add('hidden');
@@ -350,36 +340,28 @@
 
             // 4. Data Sync
             if (!unsubscribeSnapshot && firebaseConfig.apiKey !== "YOUR_API_KEY") {
-                unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        editableElements.forEach(el => {
-                            const key = el.getAttribute('data-edit-key');
-                            if (data[key] !== undefined) {
-                                el.textContent = data[key];
-                            }
-                        });
-                    }
-                }, (error) => {
-                    console.error("Firestore sync error:", error);
-                });
+                try {
+                    unsubscribeSnapshot = onSnapshot(getDocRef(), (docSnap) => {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            editableElements.forEach(el => {
+                                const key = el.getAttribute('data-edit-key');
+                                if (data[key] !== undefined) {
+                                    el.textContent = data[key];
+                                }
+                            });
+                        }
+                    }, (error) => {
+                        console.error("Firestore sync error:", error);
+                    });
+                } catch (syncError) {
+                    console.error("데이터 동기화 설정 오류:", syncError);
+                }
             }
         });
 
         // 5. Handlers
         authBtn.addEventListener('click', async () => {
-            // 방어 코드: 파이어베이스 설정이 안 된 경우 모달 창 띄우기
-            if (firebaseConfig.apiKey === "YOUR_API_KEY") {
-                firebaseModal.classList.remove('hidden');
-                return;
-            }
-
-            // 방어 코드: 로컬 파일 경로인 경우
-            if (isLocalFile) {
-                showToast("구글 로그인은 보안상 웹 서버(GitHub Pages 등)에서만 작동합니다. 파일을 호스팅한 뒤 실행해주세요.", true);
-                return;
-            }
-
             if (isUserAdmin) {
                 try {
                     await signOut(auth);
@@ -391,10 +373,14 @@
             } else {
                 const provider = new GoogleAuthProvider();
                 try {
+                    showToast("계정 권한을 확인 중입니다...");
                     await signInWithPopup(auth, provider);
-                    showToast("관리자 로그인 성공!");
                 } catch (error) {
-                    showToast("로그인 취소 또는 오류가 발생했습니다.", true);
+                    if (error.code === 'auth/unauthorized-domain') {
+                        showToast("Firebase 콘솔(Authentication ➔ 설정)에서 'kharazad.github.io'를 승인된 도메인에 추가해주세요.", true);
+                    } else {
+                        showToast("로그인 취소 또는 권한이 없습니다.", true);
+                    }
                     console.error("Google Login Error:", error);
                 }
             }
