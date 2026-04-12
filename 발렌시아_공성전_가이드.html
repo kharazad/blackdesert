@@ -154,14 +154,14 @@
                                 <thead class="sticky top-0 shadow-md z-20">
                                     <tr>
                                         <th class="border-b border-r border-stone-300 px-1 py-2 text-stone-600 font-bold bg-stone-200">No</th>
-                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100">리젠</th>
+                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100" data-edit-key="cpThRegen">리젠</th>
                                         <th class="border-b border-r border-stone-300 px-2 py-2 text-orange-800 font-bold bg-orange-100">전투력 ↓</th>
                                         <th class="border-b border-r border-stone-300 px-2 py-2 text-stone-700 font-bold bg-stone-200">전투력비교</th>
-                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-sky-800 font-bold bg-sky-100">청플</th>
+                                        <th class="border-b border-r border-stone-300 px-2 py-2 text-sky-800 font-bold bg-sky-100" data-edit-key="cpThEnemy">청플</th>
                                         <th class="border-b border-stone-300 px-2 py-2 text-sky-800 font-bold bg-sky-100">전투력</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-stone-800 font-medium">
+                                <tbody class="text-stone-800 font-medium" data-edit-key="cpTableBody">
                                     <tr class="border-b border-stone-200">
                                         <td class="border-r border-stone-200 py-1.5 bg-white">1</td>
                                         <td class="border-r border-stone-200 py-1.5 bg-[#fff3ec]">청춘만세</td>
@@ -1129,6 +1129,11 @@
                     }
                 });
 
+                // 표 데이터가 업데이트 된 후 차트 동기화
+                if (typeof window.updateChartFromTable === 'function') {
+                    window.updateChartFromTable();
+                }
+
                 // 2. 현재 열려있는 동적 탭들 다시 그리기
                 if (window.currentMapNode) activateNode(window.currentMapNode, true);
                 if (window.currentClassId) {
@@ -1598,7 +1603,7 @@
             const colorCheongple = 'rgba(56, 189, 248, 0.85)'; // Tailwind sky-400
 
             const ctxSummary = document.getElementById('cpSummaryChart').getContext('2d');
-            new Chart(ctxSummary, {
+            window.summaryChart = new Chart(ctxSummary, {
                 type: 'bar',
                 data: {
                     labels: ['최고 전투력', '평균 전투력', '최저 전투력'],
@@ -1613,6 +1618,61 @@
                     plugins: { tooltip: { callbacks: { label: function(context) { return context.dataset.label + ': ' + context.raw.toLocaleString(); } } } }
                 }
             });
+
+            // 표의 데이터를 읽어서 차트를 동적으로 업데이트하는 함수
+            window.updateChartFromTable = function() {
+                const rows = document.querySelectorAll('tbody[data-edit-key="cpTableBody"] tr');
+                if (rows.length === 0) return;
+
+                let regenCPs = [];
+                let enemyCPs = [];
+                
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if(cells.length >= 6) {
+                        const rCP = parseInt(cells[2].innerText.replace(/,/g, '').trim());
+                        const eCP = parseInt(cells[5].innerText.replace(/,/g, '').trim());
+                        if(!isNaN(rCP)) regenCPs.push(rCP);
+                        if(!isNaN(eCP)) enemyCPs.push(eCP);
+                    }
+                });
+
+                if (regenCPs.length > 0 && enemyCPs.length > 0 && window.summaryChart) {
+                    const rMax = Math.max(...regenCPs);
+                    const rMin = Math.min(...regenCPs);
+                    const rAvg = Math.round(regenCPs.reduce((a,b) => a+b, 0) / regenCPs.length);
+
+                    const eMax = Math.max(...enemyCPs);
+                    const eMin = Math.min(...enemyCPs);
+                    const eAvg = Math.round(enemyCPs.reduce((a,b) => a+b, 0) / enemyCPs.length);
+
+                    const regenName = document.querySelector('[data-edit-key="cpThRegen"]')?.innerText || '리젠';
+                    const enemyName = document.querySelector('[data-edit-key="cpThEnemy"]')?.innerText || '적대 길드';
+
+                    window.summaryChart.data.datasets[0].label = regenName;
+                    window.summaryChart.data.datasets[0].data = [rMax, rAvg, rMin];
+                    
+                    window.summaryChart.data.datasets[1].label = enemyName;
+                    window.summaryChart.data.datasets[1].data = [eMax, eAvg, eMin];
+                    
+                    // Y축 최소값 동적 조정 (최소값보다 약간 낮게 설정하여 그래프 극대화)
+                    const allMin = Math.min(rMin, eMin);
+                    window.summaryChart.options.scales.y.min = Math.max(0, Math.floor(allMin * 0.8 / 10000) * 10000);
+                    
+                    window.summaryChart.update();
+                }
+            };
+            
+            // 초기 1회 실행
+            window.updateChartFromTable();
+
+            // 실시간 편집 중 차트 자동 업데이트 이벤트
+            const cpTableBody = document.querySelector('tbody[data-edit-key="cpTableBody"]');
+            if (cpTableBody) cpTableBody.addEventListener('input', window.updateChartFromTable);
+            const cpThRegen = document.querySelector('[data-edit-key="cpThRegen"]');
+            if (cpThRegen) cpThRegen.addEventListener('input', window.updateChartFromTable);
+            const cpThEnemy = document.querySelector('[data-edit-key="cpThEnemy"]');
+            if (cpThEnemy) cpThEnemy.addEventListener('input', window.updateChartFromTable);
 
             // --- 5. Gemini API Integration ---
             const apiKey = ""; // API key will be injected by the environment
